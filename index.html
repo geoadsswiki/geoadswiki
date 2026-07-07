@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoAds Wiki — База знаний телемаркетолога</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #070707;
+  --secondary: #F8F8F8;
+  --text: #999999;
+  --body-text: #d0d0d0;
+  --accent: #9333EA;
+  --accent-hover: #a855f7;
+  --blue: #2E3DD6;
+  --dark-2: #111113;
+  --dark-3: #1C1C1C;
+  --dark-4: #313131;
+  --radius: 16px;
+  --radius-btn: 100px;
+}
+*{margin:0;padding:0;box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--dark-4) var(--primary)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--primary)}
+::-webkit-scrollbar-thumb{background:var(--dark-4);border-radius:3px}
+html{scroll-behavior:smooth}
+body{font-family:'Onest',sans-serif;background:var(--primary);color:var(--secondary);line-height:1.6;min-height:100vh;zoom:1.25}
+
+header{position:sticky;top:0;z-index:100;background:rgba(7,7,7,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--dark-3);padding:0 40px;display:flex;align-items:center;height:68px}
+.header-nav{display:none}
+body.sidebar-hidden .header-nav{display:flex;gap:8px;margin-left:auto}
+.header-nav a{color:var(--text);text-decoration:none;padding:8px 16px;border-radius:var(--radius-btn);font-size:14px;font-weight:500;transition:.25s}
+.header-nav a:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
+.header-settings-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:8px;border-radius:50%;transition:.2s;display:flex;align-items:center;line-height:1}
+.header-settings-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
+.logo{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;color:var(--secondary);text-decoration:none}
+.logo img{height:32px;width:auto}
+.logo span{color:var(--accent)}
+
+.layout{display:flex}
+.sidebar{width:200px;flex-shrink:0;position:sticky;top:68px;align-self:flex-start;padding:28px 16px;border-right:1px solid var(--dark-3);min-height:calc(100vh - 68px);display:flex;flex-direction:column}
+.sidebar a{display:block;padding:10px 16px;border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;font-weight:500;transition:.2s;margin-bottom:4px}
+.sidebar a:hover{color:var(--secondary);background:rgba(255,255,255,.04)}
+.sidebar a.active{color:#fff;background:var(--accent)}
+.main{flex:1;min-width:0}
+nav a{color:var(--text);text-decoration:none;padding:8px 16px;border-radius:var(--radius-btn);font-size:14px;font-weight:500;transition:.25s}
+nav a:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
+
+.hero{padding:100px 10% 80px;background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(147,51,234,.2) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(46,61,214,.12) 0%,transparent 60%);text-align:center}
+.hero h1{font-size:56px;font-weight:700;line-height:1.15;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:var(--text);max-width:640px;margin:0 auto 36px;line-height:1.7}
+
+.section{padding:70px 10%;border-top:1px solid var(--dark-3)}
+.section-header{margin-bottom:40px}
+.section-header h2{font-size:36px;font-weight:700;margin-bottom:12px}
+.section-header p{color:var(--text);font-size:16px;max-width:600px}
+.section-header .badge{display:inline-block;padding:4px 14px;border-radius:var(--radius-btn);background:rgba(147,51,234,.15);color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+
+.content-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);padding:32px;margin-bottom:20px}
+.content-block p{color:var(--body-text);margin-bottom:12px;line-height:1.7}
+
+.objection-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);padding:24px 28px;margin-bottom:14px}
+.objection-block .q{font-weight:600;color:var(--secondary);margin-bottom:8px;font-size:15px}
+.objection-block .a{color:var(--body-text);line-height:1.7;font-size:15px}
+.objection-block .a + .a{margin-top:12px;padding-top:12px;border-top:1px solid var(--dark-3)}
+
+.collapse-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.collapse-header{padding:18px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:16px;transition:.25s;user-select:none}
+.collapse-header:hover{background:rgba(255,255,255,.03)}
+.collapse-header .arrow{transition:.3s;color:var(--text);font-size:12px}
+.collapse-body{padding:0 24px 20px;color:var(--body-text);font-size:15px;line-height:1.7;display:none}
+.collapse-body.open{display:block}
+.collapse-header.open .arrow{transform:rotate(180deg)}
+
+.script-layout{display:flex;gap:0;background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);overflow:hidden;min-height:500px}
+.script-sidebar{width:280px;flex-shrink:0;border-right:1px solid var(--dark-3);background:var(--dark-2);padding:8px}
+.script-sidebar .s-cat{margin-bottom:4px}
+.script-sidebar .s-cat-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border-radius:10px;font-size:14px;font-weight:600;transition:.2s;color:var(--text);user-select:none}
+.script-sidebar .s-cat-header:hover{background:rgba(255,255,255,.04);color:var(--secondary)}
+.script-sidebar .s-cat-header .arrow{font-size:10px;transition:.25s;color:var(--text)}
+.script-sidebar .s-cat-header.open .arrow{transform:rotate(90deg)}
+.script-sidebar .s-item{padding:10px 16px 10px 44px;cursor:pointer;border-radius:8px;font-size:13px;color:var(--text);transition:.2s;display:none}
+.script-sidebar .s-item:hover{background:rgba(147,51,234,.1);color:var(--secondary)}
+.script-sidebar .s-item.active{background:var(--accent);color:#fff}
+.script-content{flex:1;padding:32px;overflow-y:auto}
+.script-content .script-page{display:none}
+.script-content .script-page.active{display:block}
+.script-content .script-page p{margin-bottom:12px;line-height:1.7;color:var(--body-text)}
+.script-content .script-page .step-label{color:var(--accent);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;margin-top:20px}
+
+footer{margin-top:40px;padding:40px 10%;border-top:1px solid var(--dark-3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer p{color:var(--text);font-size:14px}
+footer a{color:var(--accent);text-decoration:none}
+
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+.ic{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;flex-shrink:0}
+.ic svg{width:32px;height:32px;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.ic-sm{width:26px;height:26px}
+.ic-sm svg{width:26px;height:26px}
+.ic-cat{color:#f59e0b}
+.s-cat-header.open .ic-cat{color:#f59e0b}
+.collapse-header .ic{transition:.2s}
+.collapse-header:hover .ic{filter:brightness(1.2)}
+.s-cat-header .arrow{font-size:10px;transition:.25s;color:var(--text)}
+.ic-orange{color:#f59e0b}.ic-orange svg{stroke:#f59e0b}
+.ic-cyan{color:#22d3ee}.ic-cyan svg{stroke:#22d3ee}
+.ic-yellow{color:#eab308}.ic-yellow svg{stroke:#eab308}
+.ic-green{color:#22c55e}.ic-green svg{stroke:#22c55e}
+.ic-blue{color:#3b82f6}.ic-blue svg{stroke:#3b82f6}
+.ic-red{color:#ef4444}.ic-red svg{stroke:#ef4444}
+.ic-purple{color:#a78bfa}.ic-purple svg{stroke:#a78bfa}
+.q-mark{display:inline;background:linear-gradient(135deg,rgba(147,51,234,.18),rgba(46,61,214,.18));border-left:3px solid var(--accent);padding:10px 16px;border-radius:0 10px 10px 0;margin:8px 0;font-weight:600;color:var(--secondary);font-size:15px;line-height:1.7}
+
+.settings-btn{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;font-weight:500;transition:.2s;margin-top:auto;cursor:pointer;border:none;background:none;width:100%;font-family:'Onest',sans-serif}
+.settings-btn:hover{color:var(--secondary);background:rgba(255,255,255,.04)}
+.settings-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:200;display:none;backdrop-filter:blur(4px)}
+.settings-overlay.open{display:block}
+.settings-panel{position:fixed;top:0;right:-420px;width:400px;height:100%;background:var(--dark-2);border-left:1px solid var(--dark-3);z-index:201;transition:right .35s cubic-bezier(.22,1,.36,1);overflow-y:auto;padding:0}
+.settings-panel.open{right:0}
+.settings-panel-header{position:sticky;top:0;background:var(--dark-2);border-bottom:1px solid var(--dark-3);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;z-index:2}
+.settings-panel-header h3{font-size:18px;font-weight:600}
+.settings-close{background:none;border:none;color:var(--text);cursor:pointer;padding:6px;border-radius:8px;transition:.2s}
+.settings-close:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
+.settings-body{padding:20px 28px 40px}
+.settings-group{margin-bottom:28px}
+.settings-group label{display:block;font-size:13px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px}
+.settings-row{display:flex;gap:8px;flex-wrap:wrap}
+.settings-opt{padding:8px 16px;border-radius:8px;border:1px solid var(--dark-3);background:transparent;color:var(--text);cursor:pointer;font-size:13px;font-family:'Onest',sans-serif;font-weight:500;transition:.2s}
+.settings-opt:hover{border-color:var(--dark-4);color:var(--secondary)}
+.settings-opt.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.settings-opt.clr-swatch{width:36px;height:36px;padding:0;border-radius:50%;border:2px solid transparent;flex:none}
+.settings-opt.clr-swatch.active{border-color:#fff;box-shadow:0 0 0 2px var(--accent)}
+.settings-row.clr-grid{gap:6px}
+.settings-slider{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--dark-3);outline:none;transition:.2s}
+.settings-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;transition:.2s}
+.settings-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
+.settings-val{color:var(--text);font-size:13px;margin-top:6px;text-align:right}
+.sidebar-spacer{flex:1}
+
+/* theme overrides */
+body.light{--primary:#f8f8f8;--secondary:#1a1a2e;--text:#555;--body-text:#222;--dark-2:#fff;--dark-3:#e5e7eb;--dark-4:#d1d5db}
+body.light .hero{background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(147,51,234,.08) 0%,transparent 70%)}
+body.light .content-block,body.light .script-layout,body.light .objection-block,body.light .collapse-block,body.light .settings-panel,body.light .settings-panel-header{background:#fff}
+body.light .script-sidebar{background:#f9fafb}
+body.light input{background:#fff;color:#1a1a2e}
+body.light .sidebar a:hover{color:#1a1a2e;background:rgba(0,0,0,.04)}
+body.light .sidebar .settings-btn:hover{color:#1a1a2e;background:rgba(0,0,0,.04)}
+body.light .q-mark{background:linear-gradient(135deg,rgba(147,51,234,.1),rgba(46,61,214,.1))}
+body.contrast{--primary:#000;--secondary:#fff;--text:#ccc;--body-text:#eee;--accent:#ff4444;--accent-hover:#ff6666;--blue:#4488ff;--dark-2:#111;--dark-3:#333;--dark-4:#555}
+body.contrast .hero{background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(255,68,68,.15) 0%,transparent 70%)}
+body.contrast .q-mark{border-left-color:var(--accent)}
+
+@media(max-width:768px){
+  header{padding:0 16px}
+  .logo{font-size:18px;height:24px}
+  .logo img{height:24px}
+  nav{gap:4px;overflow-x:auto}
+  nav a{font-size:12px;padding:6px 12px;white-space:nowrap}
+  .hero{padding:60px 20px 50px}
+  .hero h1{font-size:32px}
+  .section{padding:40px 20px}
+  .section-header h2{font-size:28px}
+  .script-layout{flex-direction:column}
+  .script-sidebar{width:100%;border-right:none;border-bottom:1px solid var(--dark-3)}
+}
+
+/* sidebar modes */
+body.sidebar-hidden .sidebar{display:none}
+body.sidebar-hidden .main{max-width:none}
+body.sidebar-hidden .layout{display:block}
+body.sidebar-right .layout{flex-direction:row-reverse}
+body.sidebar-right .sidebar{border-right:none;border-left:1px solid var(--dark-3)}
+body.sidebar-top .layout{flex-direction:column}
+body.sidebar-top .sidebar{width:100%;min-height:auto;position:static;border-right:none;border-bottom:1px solid var(--dark-3);padding:12px 16px;flex-direction:row;gap:4px;align-items:center}
+body.sidebar-top .sidebar a{white-space:nowrap;margin-bottom:0}
+body.sidebar-top .sidebar .sidebar-spacer{display:none}
+body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto}
+
+/* audio/video player design */
+.player-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);overflow:hidden;transition:border-color .3s}
+.player-block:hover{border-color:rgba(147,51,234,.3)}
+.calls-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.calls-grid{grid-template-columns:1fr}}
+
+.audio-card{display:flex;flex-direction:column;padding:20px 24px}
+.audio-card .top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.audio-card .icon{width:44px;height:44px;border-radius:12px;background:rgba(147,51,234,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.audio-card .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.audio-card .info{flex:1;min-width:0}
+.audio-card .info .name{font-weight:600;font-size:15px;color:var(--secondary);display:block;margin-bottom:2px}
+.audio-card .info .desc{font-size:13px;color:var(--text);display:block}
+.audio-card .info .duration{font-size:12px;color:var(--text);opacity:.7;display:block;margin-top:4px}
+
+.audio-card .controls{display:flex;align-items:center;gap:12px}
+.audio-card .play-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
+.audio-card .play-btn:hover{background:var(--accent-hover);transform:scale(1.05)}
+.audio-card .play-btn svg{width:16px;height:16px;fill:currentColor;stroke:none}
+.audio-card .play-btn.playing svg{transform:translateX(0)}
+.audio-card .play-btn:not(.playing) svg{margin-left:2px}
+.audio-card .progress-wrap{flex:1;height:6px;background:var(--dark-3);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
+.audio-card .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#a855f7);border-radius:3px;width:0;transition:width .1s linear}
+.audio-card .time{font-size:12px;color:var(--text);font-variant-numeric:tabular-nums;min-width:80px;text-align:right}
+
+.video-card{padding:24px}
+.video-card .video-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.video-card .video-top .icon{width:44px;height:44px;border-radius:12px;background:rgba(147,51,234,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+.video-card .video-top .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.video-card .video-top .info .name{font-weight:600;font-size:15px;color:var(--secondary)}
+.video-card .video-top .info .desc{font-size:13px;color:var(--text)}
+.video-card video{width:100%;border-radius:12px;background:#000;display:block;max-height:480px}
+.video-card .video-controls{display:flex;align-items:center;gap:12px;margin-top:12px}
+.video-card .video-controls .play-btn{width:40px;height:40px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
+.video-card .video-controls .play-btn:hover{background:var(--accent-hover);transform:scale(1.05)}
+.video-card .video-controls .play-btn svg{width:18px;height:18px;fill:currentColor;stroke:none}
+.video-card .video-controls .play-btn:not(.playing) svg{margin-left:3px}
+.video-card .video-controls .progress-wrap{flex:1;height:6px;background:var(--dark-3);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
+.video-card .video-controls .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#a855f7);border-radius:3px;width:0;transition:width .1s linear}
+.video-card .video-controls .time{font-size:12px;color:var(--text);font-variant-numeric:tabular-nums;min-width:100px;text-align:right}
+
+.video-card .video-wrap{position:relative;border-radius:12px;overflow:hidden;background:#000}
+.video-card .video-wrap video{width:100%;display:block;max-height:480px}
+.video-card .big-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(147,51,234,.85);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;opacity:0;pointer-events:none;z-index:2}
+.video-card .big-play.show{opacity:1;pointer-events:auto}
+.video-card .big-play:hover{transform:translate(-50%,-50%) scale(1.08)}
+.video-card .big-play svg{width:26px;height:26px;fill:currentColor;stroke:none;margin-left:4px}
+.video-card .sec-controls,.audio-card .sec-controls{display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px solid var(--dark-3)}
+.video-card .sec-controls .ctrl-group,.audio-card .sec-controls .ctrl-group{display:flex;align-items:center;gap:6px;color:var(--text);font-size:12px}
+.video-card .sec-controls .ctrl-group svg,.audio-card .sec-controls .ctrl-group svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.video-card .sec-controls .vol-slider,.audio-card .sec-controls .vol-slider{width:60px;height:4px;-webkit-appearance:none;background:var(--dark-3);border-radius:2px;outline:none;cursor:pointer}
+.video-card .sec-controls .vol-slider::-webkit-slider-thumb,.audio-card .sec-controls .vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
+.video-card .sec-controls .vol-slider::-moz-range-thumb,.audio-card .sec-controls .vol-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
+.video-card .sec-controls .speed-btn,.audio-card .sec-controls .speed-btn{background:none;border:1px solid var(--dark-4);color:var(--text);font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;cursor:pointer;font-family:'Onest',sans-serif;transition:.2s;min-width:36px;text-align:center}
+.video-card .sec-controls .speed-btn:hover,.audio-card .sec-controls .speed-btn:hover{border-color:var(--accent);color:var(--secondary)}
+.video-card .sec-controls .dload-btn,.audio-card .sec-controls .dload-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:4px;border-radius:6px;display:flex;transition:.2s;margin-left:auto}
+.video-card .sec-controls .dload-btn:hover,.audio-card .sec-controls .dload-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
+.video-card .sec-controls .fs-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:4px;border-radius:6px;display:flex;transition:.2s}
+.video-card .sec-controls .fs-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
+.audio-card .controls{margin-bottom:10px}
+video::-webkit-media-controls{display:none!important}
+video::-moz-media-controls{display:none!important}
+video::-ms-media-controls{display:none!important}
+</style>
+<body>
+
+<header>
+  <a href="#" class="logo">
+    <img src="logo_geoads.svg" alt="GeoAds">
+    <span>Wiki</span>
+  </a>
+  <nav class="header-nav">
+    <a href="#scripts">Скрипт</a>
+    <a href="#short">Возражения</a>	
+    <a href="#meeting">Встреча</a>	
+    <a href="#calls">Звонки</a>
+    <a href="#video">Видео</a>
+    <button class="header-settings-btn" onclick="toggleSettings()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="layout">
+<div class="sidebar">
+  <a href="#scripts" class="active">Скрипт</a>
+  <a href="#short">Возражения</a>	
+  <a href="#meeting">Встреча</a>	
+  <a href="#calls">Звонки</a>
+  <a href="#video">Видео</a>
+  <div class="sidebar-spacer"></div>
+  <button class="settings-btn" onclick="toggleSettings()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Настройки
+  </button>
+</div>
+<div class="main">
+
+<section class="hero">
+  <h1>База знаний <span>телемаркетолога</span></h1>
+  <p>Скрипты, ответы на возражения и регламент работы.</p>
+</section>
+
+<section class="section" id="scripts">
+  <div class="section-header fade-in">
+    <span class="badge">скрипты</span>
+    <h2>Скрипт</h2>
+  </div>
+
+  <div class="script-layout fade-in">
+    <div class="script-sidebar">
+      <div class="s-cat">
+        <div class="s-cat-header open" onclick="toggleSideCat(this)">
+          <span class="arrow">&#9654;</span>
+          <span class="ic ic-cat ic-orange"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          Автосервис
+        </div>
+        <div class="s-item active" onclick="showScript(this, 'auto-paid')">Платный</div>
+        <div class="s-item" onclick="showScript(this, 'auto-free')">Не платный</div>
+      </div>
+      <div class="s-cat">
+        <div class="s-cat-header open" onclick="toggleSideCat(this)">
+          <span class="arrow">&#9654;</span>
+          <span class="ic ic-cat ic-cyan"><svg viewBox="0 0 24 24"><path d="M7,2C4,2 2,5 2,8C2,10.11 3,13 4,14C5,15 6,22 8,22C12.54,22 10,15 12,15C14,15 11.46,22 16,22C18,22 19,15 20,14C21,13 22,10.11 22,8C22,5 20,2 17,2C14,2 14,3 12,3C10,3 10,2 7,2Z"/></svg></span>
+          Стоматология
+        </div>
+        <div class="s-item" onclick="showScript(this, 'dent-paid')">Платный</div>
+        <div class="s-item" onclick="showScript(this, 'dent-free')">Не платный</div>
+      </div>
+    </div>
+
+    <div class="script-content">
+      <div class="script-page active" id="page-auto-paid">
+        <p>Ало, да (имя лпр) здравствуйте!</p>
+        <p>Это____ . Звоню по поводу вашего автосервиса____ на счёт Яндекс.Карт.<br>
+        Смотрите, у вас сейчас Яндекс.Бизнес к карточке подключен, но вот автосервис перестал в выдаче по некоторым запросам выходить: по ТО и по ремонту двигателя.</p>
+        <p><span class="q-mark">Подскажите, у вас же есть эти направления?</span></p>
+        <p>(ждём ответ)</p>
+        <p><span class="q-mark">Ага, а карточкой вы сами занимаетесь или помогает кто-то?</span></p>
+        <p>(ждём ответ)</p>
+        <p>Ага, понял(а), просто вот эта ситуация почему вы в выдаче перестали выходить по таким высокомаржинальным запросам связана с тем, что у Яндекса очень большое обновление произошло - изменились алгоритмы Y1, на которых Яндекс и построен.</p>
+        <p>У вас просто карточка сейчас ведется некорректно, то есть не по обновленным алгоритмам.</p>
+        <p>Ну вот если кратенько пробежаться… (кратко перечислим что не так)</p>
+        <p>Тут просто смотрите какой момент, если сейчас нужны вам клиенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям и не теряли ваших клиентов я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как мы будем карточку вести, чтобы вы были в ТОП-е.</p>
+        <p>Мы в этом профессионалы, работаем, как с дилерскими автосервисами, так и с федеральными сетями, может знаете Мотюль Гараж, Колеса Даром, Зимверк - мы ведем, ну и также с локальными сервисами.</p>
+        <p>Поэтому на встрече все покажем и расскажем, если понравиться - посотрудничаем.<br>
+        Даже если вы не купите - вы все равно получите много очень полезной информации!</p>
+        <p><span class="q-mark">Подскажите, завтра в 14 будет удобно?</span></p>
+        <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарь, чтобы не забыть.</p>
+        <p>До встречи!</p>
+      </div>
+
+      <div class="script-page" id="page-auto-free">
+        <p>Ало, да (имя лпр) здравствуйте! Это____ . Звоню по поводу вашего автосервиса____ .</p>
+        <p><span class="q-mark">Подскажите, а кто у вас сейчас за актуализацию информации на Яндекс картах отвечает?</span><br>
+        Ага, понял(а), там просто автосервис перестала в выдаче по некоторым запросам выходить _______ Это связано с большим обновлением Яндекса, там изменились алгоритмы Y1.</p>
+        <p>У вас просто карточка сейчас ведется не согласно именно обновленным алгоритмам, поэтому вы и не выходите у потенциальных клиентов.</p>
+        <p class="step-label">ПРИ НЕОБХОДИМОСТИ:</p>
+        <p>Ну вот если кратенько пробежаться… (кратко перечисляем что не так)</p>
+        <p>Тут просто смотрите какой момент, если сейчас нужны вам клиенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как будем карточку вести, чтобы вы были в ТОП-е.</p>
+        <p>Поэтому на встрече все покажем и расскажем, если понравиться- посотрудничаем.<br>
+        Даже если вы не купите - вы все равно получите много очень полезной информации!</p>
+        <p><span class="q-mark">Подскажите, завтра в 14 будет удобно?</span></p>
+        <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
+        <p>До встречи!</p>
+      </div>
+
+      <div class="script-page" id="page-dent-paid">
+        <p>Ало, да (имя лпр) здравствуйте!</p>
+        <p>Это____ . Звоню по поводу вашей стоматологии ____ на счёт Яндекс.Карт.<br>
+        Смотрите, у вас сейчас Яндекс.Бизнес к карточке подключен, но вот стоматология перестала в выдаче по некоторым запросам выходить: по имплантации и по ортодонтии по всем ключевикам соответственно. Также на текущий момент вы не выходите и в новых продуктах Яндекса: Алиса АI и Яндекс.Медицина.</p>
+        <p>Подскажите, пожалуйста, а карточкой вы сами занимаетесь или помогает кто-то?</p>
+        <p>(ждём ответ)</p>
+        <p>Ага, понял(а), просто вот эта ситуация почему вы в выдаче перестали выходить по таким высокомаржинальным запросам связана с тем, что у Яндекса очень большое обновление произошло - изменились алгоритмы Y1, на которых Яндекс и построен.</p>
+        <p>У вас просто карточка сейчас ведется не согласно именно обновленным алгоритмам, поэтому вы и не выходите у потенциальных клиентов.</p>
+        <p>Ну вот если кратенько пробежаться… (кратко перечисляем что не так)</p>
+        <p>Тут просто смотрите какой момент, если сейчас нужны вам пациенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как будем карточку вести, чтобы вы были в ТОП-е.</p>
+        <p>Мы в этом профессионалы, у нас более 600 стоматологий, работаем с Арамом Давидяном (первый элайнеры завез), Луиза Автандилян, сейчас сообщество стоматологов с ней делаем, МИНЗДРАВ и многие другие.</p>
+        <p>Подскажите, завтра в 14 будет удобно?</p>
+        <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
+        <p>До встречи!</p>
+      </div>
+
+      <div class="script-page" id="page-dent-free">
+        <p>Ало, да (имя лпр) здравствуйте!</p>
+        <p>Это____ . Звоню по поводу вашей стоматологии ____ .<br>
+        <span class="q-mark">Подскажите, а кто у вас сейчас за актуализацию информации на Яндекс картах отвечает?</span></p>
+        <p>(ждём ответ)</p>
+        <p>Ага, понял(а), там просто стоматология перестала в выдаче по некоторым запросам выходить: по имплантации и по ортодонтии по всем ключевикам. Также на текущий момент вы не выходите и в новых продуктах Яндекса: Алиса АI и в Яндекс.Медицине.</p>
+        <p>Это связано с большим обновлением Яндекса, там изменились алгоритмы Y1.</p>
+        <p>У вас просто карточка сейчас ведется не согласно именно обновленным алгоритмам, поэтому вы и не выходите у потенциальных клиентов.</p>
+        <p class="step-label">ПРИ НЕОБХОДИМОСТИ:</p>
+        <p>Ну вот если кратенько пробежаться… (кратко перечисляем что не так)</p>
+        <p>Тут просто смотрите какой момент, если сейчас нужны вам пациенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как будем карточку вести, чтобы вы были в ТОП-е.</p>
+        <p>Поэтому на встрече все покажем и расскажем, если понравиться- посотрудничаем.<br>
+        Даже если вы не купите - вы все равно получите много очень полезной информации!</p>
+        <p><span class="q-mark">Подскажите, завтра в 14 будет удобно?</span></p>
+        <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
+        <p>До встречи!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="short">
+  <div class="section-header fade-in">
+    <span class="badge">Возражения</span>
+    <h2>Ответы на возражения</h2>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-yellow"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Кто-то занимается <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Да, я вижу, что с Вашей карточкой работают, но дело в том, что делают они это некорректно. Красиво вам карточку любой школьник оформит, нам же важно грамотно вести её согласно алгоритмам новой версии поиска Яндекса, чтобы Вы выходили в ТОПе выдачи. К сожалению, Ваш специалист делает это некорректно, поэтому давайте встретимся и на встрече разберем с помощью чего Вы можете попасть в ТОП выдачи. Завтра в 14.00 удобно?</div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-green"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span> Я смотрел, в выдаче выхожу <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Смотрите, то что вы у себя выходите в ТОПе выдачи - так и должно быть, потому что вы часто присутствуете в самом (стоматологии, автосервисе..), часто строите туда маршруты, в целом открываете карточку. Также, вероятнее всего, Ваша почта привязана к личному кабинету Яндекс Бизнеса, именно поэтому Ваша карточка и должна у вас выходить одной из первых при поиске. Важно, что у ваших потенциальных клиентов вас нет в выдаче. Давайте встретимся завтра в 14.00 и все подробно разберем. Планирую встречу?</div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-blue"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Перезвоните моему сотруднику <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Смотрите, у нас встреча проводится по регламенту с первым лицом, как минимум в его присутствии, поэтому без вас мы встретиться/обсудить это не сможем. Если за этот вопрос ответственен другой человек - обычно трехстороннюю встречу согласовываем. Давайте с вами договоримся и также подключим ответственного специалиста....</div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-red"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span> Яндекс не работает, нет эффекта <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Действительно, Ваша компания сейчас не выходит в ТОП выдачи, т.к. ее карточка не корректно ведется. Кроме того, в Яндексе нельзя купить место, потому что его выдача построена на алгоритмах, которым важно следовать, чтобы быть в ТОПе выдачи и не терять клиентов. Давайте встретимся завтра в 14.00, и мы Вам подробно расскажем о том, как будем работать с карточкой, чтобы она привлекала трафик.</div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-orange"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span> 40 мин Долго <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Смотрите, Яндекс построен на очень тяжелых нейросетях, а алгоритмы содержатся во всех рекламных материалах, более того они содержатся даже в ответах на отзывы, поэтому чтобы подробно вашу карточку разобрать и рассказать, где вы сейчас теряете клиентов и как это исправить, нужно заложить именно это время. Завтра в ... удобно?</div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-green"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span> Стоимость <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">
+      <p>Стоимость у нас зависит от срока предоплаты, а также от функционала, так как он у нас достаточно широкий. В среднем могу сказать что для стоматологии это порядка 45 000 руб в разрезе месяца с оплатой по периодам. (для других сфер это порядка 30 000р в разрезе месяца)</p>
+      <p>Если клиент на ответ про стоимость говорит "нет/не нужно", то нужно уточнить: правильно ли понимаю, что по бюджету сейчас не проходим?</p>
+      <p>Если он говорит, что дорого: стоимость нашей работы без понимания того, что за эту цену вы получаете, вам ничего не даст, здесь важно сказать, что мы увеличиваем трафик клиентов из месяца в месяц на 10-20%, таким образом наша работа безусловно окупается. В рамках нашего продвижения за вами закрепляется семь специалистов, профессионалов, целая команда опытных маркетологов, и это не может стоить дёшево. Давайте встретимся, подробно расскажем, за счёт чего сможем привлечь к вам на 10-20% больше клиентов с Яндекс.Карт. Сегодня в 17.00 будет удобно?</p>
+    </div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-blue"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span> Пришлите все на почту <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">
+      <p>1. Нам нечего Вам сейчас прислать, так как все коммерческие условия у нас персональные и высылаются уже после встречи, а встреча сама по себе - это аудит, на которой мы карточку разбираем и все подробно рассказываем, находим оптимальное решение ваших задач исходя из нашего функционала.</p>
+      <p>2. Смотрите, встреча - это же аудит, а не просто презентация, на ней мы разбираем вашу карточку. Встреча длится час, но чтобы это все в текстовой формат потом перенести - нам нужно затратить еще примерно это же время. Менеджер не имеет такой возможности, давайте встретимся, все обсудим и закроем все вопросы. Сегодня в 17.00 удобно будет?</p>
+    </div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-cyan"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> Вы Яндекс? Откуда звоните? <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Я вообще из аккредитованного рекламного агентства Яндекса звоню - ГЕОЭДС. Может знаете, мы работаем с такими компаниями как ______. У Яндекс Бизнеса нет такого функционала как ведение карточек согласно алгоритмам - для этого уже созданы мы.</div>
+  </div>
+
+  <div class="collapse-block">
+    <div class="collapse-header" onclick="toggleCollapse(this)"><span class="ic ic-sm ic-red"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span> Нет клиентов от Яндекс <span class="arrow">&#9660;</span></div>
+    <div class="collapse-body">Да, я вижу, что вы уже платите, но вас сейчас обгоняют БЕСПЛАТНЫЕ карточки, потому что у вас Яндекс не так эффективно работает. Оплата в Яндекс не дает автоматического поднятия в выдаче, это даже техподдержка вам скажет. Яндекс построен на нейросетях, для него ГОРАЗДО важнее грамотное ведение карточки согласно алгоритмам Y1, давайте встретимся, расскажу, что именно у вас сейчас не так и расскажу, как мы будем вести карточку, чтобы вы получали на 10-20% больше клиентов. Сегодня в 14:00 удобно?</div>
+  </div>
+</section>
+
+<section class="section" id="meeting">
+  <div class="section-header fade-in">
+    <span class="badge">встреча + регламент</span>
+    <h2>Встреча + Регламент Подтверждения</h2>
+  </div>
+
+  <div class="content-block fade-in">
+    <p>Здравствуйте!<br>
+    Это __, напоминаю о согласованной встрече сегодня в __. Мы временной слот за менеджером зарезервировали под встречу, ближе к этому времени ссылочку на конференцию отправим. Напомните, пожалуйста, куда удобнее Макс или тг?</p>
+  </div>
+
+  <div class="content-block fade-in">
+    <h3 style="font-size:18px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--dark-3);color:var(--secondary)">РЕГЛАМЕНТ ПОДТВЕРЖДЕНИЯ И ПЕРЕДАЧИ СДЕЛКИ</h3>
+    <ol style="color:var(--body-text);line-height:2.2;padding-left:20px;list-style:decimal">
+      <li>Подтвердили встречу</li>
+      <li>Отправили в чат в битриксе «ТЕЛЕМАРКЕТИНГ»</li>
+      <li>Увидели, кто из РГ встречу берет</li>
+      <li>Завершили обработку Лида - создать на основании СДЕЛКУ</li>
+      <li>Внесли всю необходимую информацию</li>
+      <li>Открывается СДЕЛКА</li>
+      <li>Поставили наблюдателей: себя и меня</li>
+      <li>Поменяли ответственного на РГ Коммерции, который в чате отписался, что берет встречу</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="calls">
+  <div class="section-header fade-in">
+    <span class="badge">аудио</span>
+    <h2>Примеры звонков</h2>
+    <p>Реальные разговоры с клиентами. Слушайте и перенимайте лучшие приёмы.</p>
+  </div>
+
+  <div class="calls-grid" id="audioGrid">
+    <div class="player-block audio-card fade-in" data-src="audio/1.mp3">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="info">
+          <span class="name">Пример 1</span>
+          <span class="desc">Входящий звонок</span>
+          <span class="duration"></span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seek(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+    </div>
+    <div class="player-block audio-card fade-in" data-src="audio/2.mp3">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="info">
+          <span class="name">Пример 2</span>
+          <span class="desc">Обработка возражения</span>
+          <span class="duration"></span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seek(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+    </div>
+    <div class="player-block audio-card fade-in" data-src="audio/3.mp3">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="info">
+          <span class="name">Пример 3</span>
+          <span class="desc">Назначение встречи</span>
+          <span class="duration"></span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seek(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+    </div>
+    <div class="player-block audio-card fade-in" data-src="audio/4.mp3">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="info">
+          <span class="name">Пример 4</span>
+          <span class="desc">Закрытие на сделку</span>
+          <span class="duration"></span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seek(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+    </div>
+    <div class="player-block audio-card fade-in" data-src="audio/5.mp3">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="info">
+          <span class="name">Пример 5</span>
+          <span class="desc">Работа с бюджетом</span>
+          <span class="duration"></span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seek(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+    </div>
+    <div class="player-block audio-card fade-in" data-src="audio/6.mp3">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="info">
+          <span class="name">Пример 6</span>
+          <span class="desc">Повторный прозвон</span>
+          <span class="duration"></span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seek(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="video">
+  <div class="section-header fade-in">
+    <span class="badge">видео</span>
+    <h2>Видеообъяснения</h2>
+    <p>Наглядные разборы скриптов, возражений и алгоритмов работы.</p>
+  </div>
+
+  <div class="player-block video-card fade-in">
+    <div class="video-top">
+      <div class="icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+      <div class="info">
+        <div class="name">ГЕОЭДС — обзор системы</div>
+        <div class="desc">Объяснение функционала и возможностей</div>
+      </div>
+    </div>
+    <div class="video-wrap">
+      <video id="mainVideo" controls preload="metadata" playsinline src="video/%D0%93%D0%95%D0%9E%D0%AD%D0%94%D0%A1.mp4" onclick="toggleVidPlay()"></video>
+      <button class="big-play" id="bigPlayBtn" onclick="event.stopPropagation();toggleVidPlay()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+    </div>
+    <div class="video-controls">
+      <button class="play-btn" id="vidPlayBtn" onclick="toggleVidPlay()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+      <div class="progress-wrap" id="vidProgress" onclick="seekVid(event)">
+        <div class="progress-fill" id="vidFill"></div>
+      </div>
+      <span class="time" id="vidTime">0:00 / 0:00</span>
+    </div>
+    <div class="sec-controls">
+      <div class="ctrl-group">
+        <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <input class="vol-slider" type="range" min="0" max="1" step="0.05" value="1" oninput="setVidVol(this)">
+      </div>
+      <div class="ctrl-group">
+        <button class="speed-btn" id="vidSpeedBtn" onclick="cycleVidSpeed()">1×</button>
+      </div>
+      <button class="dload-btn" onclick="downloadVideo()" title="Скачать">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+      <button class="fs-btn" onclick="toggleFullscreen()" title="Во весь экран">
+        <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</div>
+
+<div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
+<div class="settings-panel" id="settingsPanel">
+  <div class="settings-panel-header">
+    <h3>Настройки сайта</h3>
+    <button class="settings-close" onclick="toggleSettings()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="settings-body">
+    <div class="settings-group">
+      <label>Масштаб</label>
+      <input type="range" class="settings-slider" id="zoomSlider" min="75" max="150" value="100" oninput="setZoom(this.value)">
+      <div class="settings-val" id="zoomVal">100%</div>
+    </div>
+    <div class="settings-group">
+      <label>Размер шрифта</label>
+      <div class="settings-row">
+        <button class="settings-opt" data-setting="fontSize" data-value="small" onclick="setSetting('fontSize','small',this)">Мелкий</button>
+        <button class="settings-opt" data-setting="fontSize" data-value="medium" onclick="setSetting('fontSize','medium',this)">Средний</button>
+        <button class="settings-opt" data-setting="fontSize" data-value="large" onclick="setSetting('fontSize','large',this)">Крупный</button>
+      </div>
+    </div>
+    <div class="settings-group">
+      <label>Межстрочный интервал</label>
+      <input type="range" class="settings-slider" id="lhSlider" min="1.2" max="2.2" step="0.1" value="1.7" oninput="setLineHeight(this.value)">
+      <div class="settings-val" id="lhVal">1.7</div>
+    </div>
+    <div class="settings-group">
+      <label>Тема</label>
+      <div class="settings-row">
+        <button class="settings-opt" data-setting="theme" data-value="dark" onclick="setSetting('theme','dark',this)">Тёмная</button>
+        <button class="settings-opt" data-setting="theme" data-value="light" onclick="setSetting('theme','light',this)">Светлая</button>
+        <button class="settings-opt" data-setting="theme" data-value="contrast" onclick="setSetting('theme','contrast',this)">Контрастная</button>
+      </div>
+    </div>
+    <div class="settings-group">
+      <label>Акцентный цвет</label>
+      <div class="settings-row clr-grid">
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#9333EA" style="background:#9333EA" onclick="setSetting('accent','#9333EA',this)" title="Фиолетовый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#a855f7" style="background:#a855f7" onclick="setSetting('accent','#a855f7',this)" title="Светло-фиолетовый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#7c3aed" style="background:#7c3aed" onclick="setSetting('accent','#7c3aed',this)" title="Тёмно-фиолетовый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#3b82f6" style="background:#3b82f6" onclick="setSetting('accent','#3b82f6',this)" title="Синий"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#2563eb" style="background:#2563eb" onclick="setSetting('accent','#2563eb',this)" title="Тёмно-синий"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#06b6d4" style="background:#06b6d4" onclick="setSetting('accent','#06b6d4',this)" title="Голубой"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#22d3ee" style="background:#22d3ee" onclick="setSetting('accent','#22d3ee',this)" title="Бирюзовый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#22c55e" style="background:#22c55e" onclick="setSetting('accent','#22c55e',this)" title="Зелёный"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#16a34a" style="background:#16a34a" onclick="setSetting('accent','#16a34a',this)" title="Тёмно-зелёный"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#eab308" style="background:#eab308" onclick="setSetting('accent','#eab308',this)" title="Жёлтый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#f59e0b" style="background:#f59e0b" onclick="setSetting('accent','#f59e0b',this)" title="Оранжевый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#f97316" style="background:#f97316" onclick="setSetting('accent','#f97316',this)" title="Ярко-оранжевый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#ef4444" style="background:#ef4444" onclick="setSetting('accent','#ef4444',this)" title="Красный"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#dc2626" style="background:#dc2626" onclick="setSetting('accent','#dc2626',this)" title="Тёмно-красный"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#ec4899" style="background:#ec4899" onclick="setSetting('accent','#ec4899',this)" title="Розовый"></button>
+        <button class="settings-opt clr-swatch" data-setting="accent" data-value="#8b5cf6" style="background:#8b5cf6" onclick="setSetting('accent','#8b5cf6',this)" title="Индиго"></button>
+      </div>
+    </div>
+    <div class="settings-group">
+      <label>Боковая панель</label>
+      <div class="settings-row">
+        <button class="settings-opt" data-setting="sidebar" data-value="left" onclick="setSidebar('left',this)">Слева</button>
+        <button class="settings-opt" data-setting="sidebar" data-value="right" onclick="setSidebar('right',this)">Справа</button>
+        <button class="settings-opt" data-setting="sidebar" data-value="top" onclick="setSidebar('top',this)">Сверху</button>
+        <button class="settings-opt" data-setting="sidebar" data-value="hidden" onclick="setSidebar('hidden',this)">Скрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© GeoAds Wiki • База знаний телемаркетолога</p>
+  <p><a href="https://geoads-ai.ru" target="_blank">geoads-ai.ru</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/color-thief@2.2.0/dist/color-thief.min.js"></script>
+<script>
+function toggleCollapse(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+function toggleSideCat(el) {
+  el.classList.toggle('open');
+  var next = el.nextElementSibling;
+  while (next && next.classList.contains('s-item')) {
+    next.style.display = next.style.display === 'block' ? 'none' : 'block';
+    next = next.nextElementSibling;
+  }
+}
+
+function showScript(el, pageId) {
+  var parent = el.closest('.script-layout');
+  parent.querySelectorAll('.s-item').forEach(function(i) { i.classList.remove('active'); });
+  el.classList.add('active');
+  parent.querySelectorAll('.script-page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('page-' + pageId).classList.add('active');
+}
+
+document.querySelectorAll('.s-cat-header.open').forEach(function(el) {
+  var next = el.nextElementSibling;
+  while (next && next.classList.contains('s-item')) {
+    next.style.display = 'block';
+    next = next.nextElementSibling;
+  }
+});
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+// ========== SETTINGS ==========
+var settings = {
+  zoom: 100,
+  fontSize: 'medium',
+  theme: 'dark',
+  accent: '#9333EA',
+  lineHeight: 1.7,
+  sidebar: 'left'
+};
+
+function loadSettings() {
+  try {
+    var saved = JSON.parse(localStorage.getItem('geoads-wiki-settings'));
+    if (saved) { Object.assign(settings, saved); }
+  } catch(e) {}
+}
+
+function saveSettings() {
+  localStorage.setItem('geoads-wiki-settings', JSON.stringify(settings));
+}
+
+function applySettings() {
+  document.body.style.zoom = settings.zoom / 100;
+  document.documentElement.style.setProperty('--accent', settings.accent);
+  document.documentElement.style.setProperty('--accent-hover', adjustColor(settings.accent, 20));
+  document.body.style.lineHeight = settings.lineHeight;
+  document.body.className = settings.theme + ' sidebar-' + settings.sidebar;
+
+  var fsMap = {small:'14px', medium:'16px', large:'18px'};
+  document.body.style.fontSize = fsMap[settings.fontSize] || '16px';
+}
+
+function adjustColor(hex, amt) {
+  var num = parseInt(hex.replace('#',''), 16);
+  var r = Math.min(255, (num >> 16) + amt);
+  var g = Math.min(255, ((num >> 8) & 0x00FF) + amt);
+  var b = Math.min(255, (num & 0x0000FF) + amt);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+function toggleSettings() {
+  var panel = document.getElementById('settingsOverlay');
+  panel.classList.toggle('open');
+  document.getElementById('settingsPanel').classList.toggle('open');
+}
+
+function setSetting(key, val, el) {
+  settings[key] = val;
+  saveSettings();
+  applySettings();
+  if (el) {
+    el.parentElement.querySelectorAll('.settings-opt').forEach(function(o) { o.classList.remove('active'); });
+    el.classList.add('active');
+  }
+}
+
+function setZoom(val) {
+  settings.zoom = parseInt(val);
+  saveSettings();
+  applySettings();
+  document.getElementById('zoomVal').textContent = val + '%';
+}
+
+function setLineHeight(val) {
+  settings.lineHeight = parseFloat(val);
+  saveSettings();
+  applySettings();
+  document.getElementById('lhVal').textContent = val;
+}
+
+function setSidebar(mode, el) {
+  settings.sidebar = mode;
+  saveSettings();
+  applySettings();
+  el.parentElement.querySelectorAll('.settings-opt').forEach(function(o) { o.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+loadSettings();
+applySettings();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var panel = document.getElementById('settingsPanel');
+  if (!panel) return;
+  panel.querySelectorAll('[data-setting]').forEach(function(el) {
+    var key = el.getAttribute('data-setting');
+    var val = el.getAttribute('data-value');
+    if (settings[key] == val) el.classList.add('active');
+  });
+  var z = document.getElementById('zoomSlider');
+  if (z) { z.value = settings.zoom; document.getElementById('zoomVal').textContent = settings.zoom + '%'; }
+  var l = document.getElementById('lhSlider');
+  if (l) { l.value = settings.lineHeight; document.getElementById('lhVal').textContent = settings.lineHeight; }
+});
+
+// ========== CUSTOM AUDIO/VIDEO PLAYERS ==========
+var audioPlayers = [];
+document.querySelectorAll('.audio-card').forEach(function(card) {
+  var src = card.getAttribute('data-src');
+  var audio = new Audio(src);
+  audio.preload = 'metadata';
+  audio.addEventListener('loadedmetadata', function() {
+    card.querySelector('.duration').textContent = formatTime(audio.duration);
+    card.querySelector('.time').textContent = '0:00 / ' + formatTime(audio.duration);
+  });
+  audio.addEventListener('timeupdate', function() {
+    var pct = (audio.currentTime / audio.duration) * 100;
+    card.querySelector('.progress-fill').style.width = pct + '%';
+    card.querySelector('.time').textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+  });
+  audio.addEventListener('ended', function() {
+    var btn = card.querySelector('.play-btn');
+    btn.classList.remove('playing');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    card.querySelector('.progress-fill').style.width = '0%';
+    card.querySelector('.time').textContent = '0:00 / ' + formatTime(audio.duration);
+  });
+  audioPlayers.push({audio: audio, card: card});
+});
+function togglePlay(btn) {
+  var card = btn.closest('.audio-card');
+  var player = audioPlayers.find(function(p) { return p.card === card; });
+  if (!player) return;
+  if (player.audio.paused) {
+    audioPlayers.forEach(function(p) {
+      if (!p.audio.paused) { p.audio.pause(); var b = p.card.querySelector('.play-btn'); b.classList.remove('playing'); b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; }
+    });
+    if (vid && !vid.paused) { vid.pause(); vidBtn.classList.remove('playing'); vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; }
+    player.audio.play();
+    btn.classList.add('playing');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+  } else {
+    player.audio.pause();
+    btn.classList.remove('playing');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+  }
+}
+function seek(event, wrap) {
+  var card = wrap.closest('.audio-card');
+  var player = audioPlayers.find(function(p) { return p.card === card; });
+  if (!player) return;
+  var rect = wrap.getBoundingClientRect();
+  player.audio.currentTime = ((event.clientX - rect.left) / rect.width) * player.audio.duration;
+}
+
+var vid = document.getElementById('mainVideo');
+var vidBtn = document.getElementById('vidPlayBtn');
+var vidFill = document.getElementById('vidFill');
+var vidTime = document.getElementById('vidTime');
+if (vid) {
+  vid.addEventListener('loadedmetadata', function() { vidTime.textContent = '0:00 / ' + formatTime(vid.duration); });
+  vid.addEventListener('timeupdate', function() {
+    var pct = (vid.currentTime / vid.duration) * 100;
+    vidFill.style.width = pct + '%';
+    vidTime.textContent = formatTime(vid.currentTime) + ' / ' + formatTime(vid.duration);
+  });
+  vid.addEventListener('ended', function() {
+    vidBtn.classList.remove('playing');
+    vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    vidFill.style.width = '0%';
+    if (bigPlay) bigPlay.classList.add('show');
+  });
+}
+function toggleVidPlay() {
+  if (!vid) return;
+  if (vid.paused) {
+    audioPlayers.forEach(function(p) {
+      if (!p.audio.paused) { p.audio.pause(); var b = p.card.querySelector('.play-btn'); b.classList.remove('playing'); b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; }
+    });
+    vid.play();
+    vidBtn.classList.add('playing');
+    vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    if (bigPlay) bigPlay.classList.remove('show');
+  } else {
+    vid.pause();
+    vidBtn.classList.remove('playing');
+    vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+  }
+}
+function seekVid(event) {
+  if (!vid) return;
+  var wrap = document.getElementById('vidProgress');
+  var rect = wrap.getBoundingClientRect();
+  vid.currentTime = ((event.clientX - rect.left) / rect.width) * vid.duration;
+}
+function formatTime(s) {
+  var m = Math.floor(s / 60);
+  var sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+// ========== VOLUME, SPEED, DOWNLOAD, FULLSCREEN ==========
+var speedValues = [0.5, 0.75, 1, 1.25, 1.5, 2];
+function setAudioVol(el) {
+  var card = el.closest('.audio-card');
+  var player = audioPlayers.find(function(p) { return p.card === card; });
+  if (player) player.audio.volume = parseFloat(el.value);
+}
+function setVidVol(el) {
+  if (vid) vid.volume = parseFloat(el.value);
+}
+function cycleSpeed(el) {
+  var card = el.closest('.audio-card');
+  var player = audioPlayers.find(function(p) { return p.card === card; });
+  if (!player) return;
+  var cur = player.audio.playbackRate;
+  var idx = speedValues.indexOf(cur);
+  var next = speedValues[(idx + 1) % speedValues.length];
+  player.audio.playbackRate = next;
+  el.textContent = next + '×';
+}
+function cycleVidSpeed() {
+  if (!vid) return;
+  var cur = vid.playbackRate;
+  var idx = speedValues.indexOf(cur);
+  var next = speedValues[(idx + 1) % speedValues.length];
+  vid.playbackRate = next;
+  document.getElementById('vidSpeedBtn').textContent = next + '×';
+}
+function downloadAudio(el) {
+  var card = el.closest('.audio-card');
+  var src = card.getAttribute('data-src');
+  var name = card.querySelector('.name').textContent;
+  var a = document.createElement('a');
+  a.href = src;
+  a.download = name + '.mp3';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function downloadVideo() {
+  if (!vid) return;
+  var src = vid.getAttribute('src');
+  var a = document.createElement('a');
+  a.href = src;
+  a.download = 'ГЕОЭДС_обзор.mp4';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function toggleFullscreen() {
+  if (!vid) return;
+  var el = vid;
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    else if (document.msExitFullscreen) document.msExitFullscreen();
+  }
+}
+
+// Big play overlay
+var bigPlay = document.getElementById('bigPlayBtn');
+if (vid && bigPlay) {
+  bigPlay.classList.add('show');
+  vid.addEventListener('play', function() { bigPlay.classList.remove('show'); });
+  vid.addEventListener('pause', function() { if (vid.currentTime > 0) bigPlay.classList.add('show'); });
+  vid.addEventListener('timeupdate', function() { if (vid.paused && vid.currentTime === 0) bigPlay.classList.add('show'); });
+}
+</script>
+</body>
+</html>
