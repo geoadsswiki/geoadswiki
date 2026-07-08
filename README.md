@@ -1,4 +1,4 @@
-# GeoAds Wiki
+# ![GeoAds](logo_geoads.svg) &nbsp; Wiki
 
 База знаний для отдела телемаркетинга. Содержит скрипты разговоров, ответы на возражения, регламент работы и примеры звонков.
 
@@ -23,9 +23,3 @@
 ## Ссылка
 
 [https://geoadsswiki.github.io/geoadswiki/](https://geoadsswiki.github.io/geoadswiki/)
-
----
-
-## Логотип
-
-![GeoAds Logo](logo_geoads.svg)
