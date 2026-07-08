@@ -734,32 +734,18 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
           <div class="desc">Объяснение функционала, и т.д</div>
         </div>
       </div>
-      <div class="video-wrap">
-        <video class="vid-player" preload="metadata" playsinline src="video/ГЕОЭДС.mp4"></video>
-        <button class="big-play" onclick="event.stopPropagation();toggleVidPlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+             <div class="video-wrap" style="border-radius:12px;overflow:hidden;background:#000;padding:0;">
+        <iframe 
+          src="https://vkvideo.ru/video_ext.php?oid=-240126034&id=456239019&hash=c787768fddcc01fc&hd=4" 
+          width="100%"  
+          height="360" 
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+          frameborder="0" 
+          allowfullscreen
+          style="display:block;width:100%;height:auto;aspect-ratio:16/9;border:none;background:#000;">
+        </iframe>
       </div>
-      <div class="video-controls">
-        <button class="play-btn" onclick="toggleVidPlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seekVid(event,this)">
-          <div class="progress-fill"></div>
-        </div>
-        <span class="time">0:00 / 0:00</span>
-      </div>
-      <div class="sec-controls">
-        <div class="ctrl-group">
-          <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-          <input class="vol-slider" type="range" min="0" max="1" step="0.05" value="1" oninput="setVidVol(this)">
-        </div>
-        <div class="ctrl-group">
-          <button class="speed-btn" onclick="cycleVidSpeed(this)">1×</button>
-        </div>
-        <button class="dload-btn" onclick="downloadVideo(this)" title="Скачать">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        </button>
-        <button class="fs-btn" onclick="toggleFullscreen(this)" title="Во весь экран">
-          <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-        </button>
-      </div>
+    </div> 
     </div>
 
     <!-- Видео 2 -->
@@ -772,7 +758,7 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
         </div>
       </div>
           <div class="video-wrap" style="border-radius:12px;overflow:hidden;background:#000;padding:0;">
-        <iframe 
+        <iframe  
           src="https://vkvideo.ru/video_ext.php?oid=-240126034&id=456239018&hash=e65b119c506b815e&hd=4" 
           width="100%" 
           height="360" 
