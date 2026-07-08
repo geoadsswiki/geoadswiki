@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GeoAds Wiki — База знаний телемаркетолога</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -343,6 +344,10 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
   <a href="#calls">Звонки</a>
   <a href="#video">Видео</a>
   <div class="sidebar-spacer"></div>
+  <button class="settings-btn" onclick="toggleSettings()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Настройки
+  </button>
 </div>
 <div class="main">
 
@@ -738,10 +743,10 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
           allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
           frameborder="0" 
           allowfullscreen
+          loading="lazy"
           style="display:block;width:100%;height:auto;aspect-ratio:16/9;border:none;background:#000;">
         </iframe>
       </div>
-    </div> 
     </div>
 
     <!-- Видео 2 -->
@@ -761,10 +766,10 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
           allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
           frameborder="0" 
           allowfullscreen
+          loading="lazy"
           style="display:block;width:100%;height:auto;aspect-ratio:16/9;border:none;background:#000;">
         </iframe>
       </div>
-    </div>
     </div>
 
   </div>
@@ -919,6 +924,14 @@ const searchCount = document.getElementById('searchCount');
 const searchTotal = document.getElementById('searchTotal');
 let searchActive = false;
 
+// Кэшируем статичные списки элементов один раз — они не создаются/не удаляются в рантайме,
+// поэтому не нужно опрашивать весь DOM при каждом поиске.
+const allSections = document.querySelectorAll('.section');
+const allScriptPages = document.querySelectorAll('.script-page');
+const allCollapseBlocks = document.querySelectorAll('.collapse-block');
+const allSCats = document.querySelectorAll('.s-cat');
+const allSItems = document.querySelectorAll('.s-item');
+
 function clearSearch() {
   if (searchInput) {
     searchInput.value = '';
@@ -927,12 +940,15 @@ function clearSearch() {
   }
 }
 
+let searchDebounceTimer = null;
 if (searchInput) {
   searchInput.addEventListener('input', function() {
     if (searchClear) {
       searchClear.classList.toggle('visible', this.value.length > 0);
     }
-    performSearch(this.value);
+    const value = this.value;
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(function() { performSearch(value); }, 120);
   });
   
   searchInput.addEventListener('focus', function() {
@@ -948,36 +964,36 @@ if (searchInput) {
   });
 }
 
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function performSearch(query) {
   query = query.toLowerCase().trim();
   let totalFound = 0;
   let totalAll = 0;
   
-  // Получаем родительский контейнер .main
-  const mainContainer = document.querySelector('.main');
-  
   // ===== 1. СБРАСЫВАЕМ ВСЁ =====
   // Снимаем подсветку
-  document.querySelectorAll('.script-page, .collapse-block, .section').forEach(function(el) {
-    removeHighlight(el);
-  });
+  allScriptPages.forEach(removeHighlight);
+  allCollapseBlocks.forEach(removeHighlight);
+  allSections.forEach(removeHighlight);
   
   // Показываем все секции
-  document.querySelectorAll('.section').forEach(function(section) {
+  allSections.forEach(function(section) {
     section.style.display = '';
   });
   
   if (query.length === 0) {
     // Если поиск пустой — показываем всё
-    document.querySelectorAll('.script-page').forEach(function(page) {
+    allScriptPages.forEach(function(page) {
       page.style.display = '';
       page.classList.remove('active');
     });
     // Активируем первый скрипт
-    const firstPage = document.querySelector('.script-page');
-    if (firstPage) firstPage.classList.add('active');
+    if (allScriptPages[0]) allScriptPages[0].classList.add('active');
     
-    document.querySelectorAll('.collapse-block').forEach(function(block) {
+    allCollapseBlocks.forEach(function(block) {
       block.style.display = '';
       const header = block.querySelector('.collapse-header');
       const body = block.querySelector('.collapse-body');
@@ -985,15 +1001,14 @@ function performSearch(query) {
       body.classList.remove('open');
     });
     
-    document.querySelectorAll('.s-cat').forEach(function(cat) {
+    allSCats.forEach(function(cat) {
       cat.style.display = '';
     });
-    document.querySelectorAll('.s-item').forEach(function(item) {
+    allSItems.forEach(function(item) {
       item.style.display = '';
     });
     // Активируем первый пункт
-    const firstItem = document.querySelector('.s-item');
-    if (firstItem) firstItem.classList.add('active');
+    if (allSItems[0]) allSItems[0].classList.add('active');
     
     // Скрываем статистику
     if (searchStats) searchStats.classList.remove('visible');
@@ -1002,11 +1017,10 @@ function performSearch(query) {
   }
   
   // ===== 2. ПОИСК В СКРИПТАХ =====
-  const scriptPages = document.querySelectorAll('.script-page');
   let foundScripts = [];
   let foundAny = false;
   
-  scriptPages.forEach(function(page) {
+  allScriptPages.forEach(function(page) {
     const text = page.textContent.toLowerCase();
     const isMatch = text.includes(query);
     
@@ -1023,10 +1037,9 @@ function performSearch(query) {
   });
   
   // ===== 3. ПОИСК В ВОЗРАЖЕНИЯХ =====
-  const collapseBlocks = document.querySelectorAll('.collapse-block');
   let foundObjects = [];
   
-  collapseBlocks.forEach(function(block) {
+  allCollapseBlocks.forEach(function(block) {
     const text = block.textContent.toLowerCase();
     const isMatch = text.includes(query);
     const header = block.querySelector('.collapse-header');
@@ -1049,7 +1062,7 @@ function performSearch(query) {
   });
   
   // ===== 4. СКРЫВАЕМ СЕКЦИИ, ГДЕ НЕТ РЕЗУЛЬТАТОВ =====
-  document.querySelectorAll('.section').forEach(function(section) {
+  allSections.forEach(function(section) {
     // Проверяем, есть ли в этой секции видимые элементы
     const visibleScripts = section.querySelectorAll('.script-page[style*="display: block"]');
     const visibleObjects = section.querySelectorAll('.collapse-block[style*="display: block"]');
@@ -1075,7 +1088,7 @@ function performSearch(query) {
   });
   
   // ===== 5. ФИЛЬТРАЦИЯ КАТЕГОРИЙ В САЙДБАРЕ =====
-  document.querySelectorAll('.s-cat').forEach(function(cat) {
+  allSCats.forEach(function(cat) {
     const items = cat.querySelectorAll('.s-item');
     let hasVisibleItem = false;
     
@@ -1106,10 +1119,10 @@ function performSearch(query) {
   
   // ===== 6. АКТИВИРУЕМ ПЕРВЫЙ НАЙДЕННЫЙ СКРИПТ =====
   // Сначала деактивируем все
-  document.querySelectorAll('.script-page').forEach(function(p) {
+  allScriptPages.forEach(function(p) {
     p.classList.remove('active');
   });
-  document.querySelectorAll('.s-item').forEach(function(item) {
+  allSItems.forEach(function(item) {
     item.classList.remove('active');
   });
   
@@ -1118,7 +1131,7 @@ function performSearch(query) {
     foundScripts[0].classList.add('active');
     
     // Активируем соответствующий пункт в сайдбаре
-    document.querySelectorAll('.s-item').forEach(function(item) {
+    allSItems.forEach(function(item) {
       const onclickAttr = item.getAttribute('onclick');
       if (onclickAttr) {
         const match = onclickAttr.match(/page-([a-z-]+)/);
@@ -1176,11 +1189,12 @@ function highlightText(element, query) {
     }
   );
   
+  const safeQuery = escapeRegex(query);
   const nodesToReplace = [];
   let node;
   while (node = walker.nextNode()) {
     const text = node.textContent;
-    const regex = new RegExp(`(${query})`, 'gi');
+    const regex = new RegExp(`(${safeQuery})`, 'gi');
     if (regex.test(text)) {
       nodesToReplace.push(node);
     }
@@ -1192,7 +1206,7 @@ function highlightText(element, query) {
     const fragment = document.createDocumentFragment();
     let lastIndex = 0;
     
-    const regex = new RegExp(`(${query})`, 'gi');
+    const regex = new RegExp(`(${safeQuery})`, 'gi');
     let match;
     while ((match = regex.exec(text)) !== null) {
       if (match.index > lastIndex) {
@@ -1484,12 +1498,19 @@ function togglePlay(btn) {
       }
     });
     
-    if (vid && !vid.paused) { 
-      vid.pause(); 
-      vidBtn.classList.remove('playing'); 
-      vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-      if (bigPlay) bigPlay.classList.add('show');
-    }
+    document.querySelectorAll('.vid-player').forEach(function(v) {
+      if (!v.paused) {
+        v.pause();
+        var vCard = v.closest('.video-card');
+        var vBtn = vCard && vCard.querySelector('.play-btn');
+        if (vBtn) {
+          vBtn.classList.remove('playing');
+          vBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+        }
+        var vBigPlay = vCard && vCard.querySelector('.big-play');
+        if (vBigPlay) vBigPlay.classList.add('show');
+      }
+    });
     
     player.audio.play();
     btn.classList.add('playing');
@@ -1523,7 +1544,12 @@ document.addEventListener('keydown', function(e) {
       return;
     }
     
-    if (vid) toggleVidPlay();
+    var playingVid = Array.prototype.find.call(document.querySelectorAll('.vid-player'), function(v) { return !v.paused; });
+    if (playingVid) {
+      var vCard = playingVid.closest('.video-card');
+      var vBtn = vCard && vCard.querySelector('.play-btn');
+      if (vBtn) toggleVidPlay(vBtn);
+    }
   }
 });
 
