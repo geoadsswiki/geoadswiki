@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="logo_geoads.svg">
+<link rel="shortcut icon" href="logo_geoads.svg">
+<link rel="apple-touch-icon" href="logo_geoads.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GeoAds Wiki — База знаний для комманды телемаркетинга</title>
@@ -26,18 +30,39 @@
 ::-webkit-scrollbar-track{background:var(--primary)}
 ::-webkit-scrollbar-thumb{background:var(--dark-4);border-radius:3px}
 html{scroll-behavior:smooth}
-body{font-family:'Onest',sans-serif;background:var(--primary);color:var(--secondary);line-height:1.6;min-height:100vh;zoom:1.25}
+body{font-family:'Onest',sans-serif;background:var(--primary);color:var(--secondary);line-height:1.6;min-height:100vh}
 
-header{position:sticky;top:0;z-index:100;background:rgba(7,7,7,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--dark-3);padding:0 40px;display:flex;align-items:center;height:68px}
-.header-nav{display:none}
-body.sidebar-hidden .header-nav{display:flex;gap:8px;margin-left:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(7,7,7,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--dark-3);padding:0 40px;display:flex;align-items:center;height:68px;gap:20px}
+.header-nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .header-nav a{color:var(--text);text-decoration:none;padding:8px 16px;border-radius:var(--radius-btn);font-size:14px;font-weight:500;transition:.25s}
 .header-nav a:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
 .header-settings-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:8px;border-radius:50%;transition:.2s;display:flex;align-items:center;line-height:1}
 .header-settings-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
-.logo{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;color:var(--secondary);text-decoration:none}
+.logo{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;color:var(--secondary);text-decoration:none;flex-shrink:0}
 .logo img{height:32px;width:auto}
 .logo span{color:var(--accent)}
+
+/* ===== SEARCH ===== */
+.header-search{flex:1;max-width:500px;margin:0 auto;position:relative}
+.header-search .search-wrapper{position:relative;display:flex;align-items:center}
+.header-search .search-icon{position:absolute;left:14px;display:flex;align-items:center;color:var(--text);pointer-events:none;opacity:.5}
+.header-search .search-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.header-search input{width:100%;padding:8px 44px 8px 42px;border-radius:var(--radius-btn);border:1px solid var(--dark-3);background:rgba(255,255,255,.06);color:var(--secondary);font-size:14px;font-family:'Onest',sans-serif;transition:all .3s ease}
+.header-search input:focus{outline:none;border-color:var(--accent);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(147,51,234,.15)}
+.header-search input::placeholder{color:var(--text)}
+.header-search .search-clear{position:absolute;right:14px;display:flex;align-items:center;color:var(--text);cursor:pointer;opacity:0;transition:all .3s ease;padding:4px;border-radius:50%}
+.header-search .search-clear.visible{opacity:.5}
+.header-search .search-clear.visible:hover{opacity:1;background:rgba(255,255,255,.06)}
+.header-search .search-clear svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.header-search .search-stats{position:absolute;top:calc(100% + 8px);right:0;background:var(--dark-2);border:1px solid var(--dark-3);border-radius:8px;padding:6px 14px;font-size:13px;color:var(--text);opacity:0;transform:translateY(-4px);transition:all .3s ease;pointer-events:none;white-space:nowrap;font-feature-settings:"tnum"}
+.header-search .search-stats.visible{opacity:1;transform:translateY(0)}
+.header-search .search-stats .search-count{color:var(--secondary);font-weight:600}
+.header-search .search-stats .search-total{color:var(--text)}
+.search-highlight{background:var(--accent);color:#fff;padding:0 2px;border-radius:3px}
+
+body.light .header-search input{background:#f1f3f5;color:#1a1a2e}
+body.light .header-search input:focus{background:#fff}
+body.light .header-search .search-stats{background:#fff}
 
 .layout{display:flex}
 .sidebar{width:200px;flex-shrink:0;position:sticky;top:68px;align-self:flex-start;padding:28px 16px;border-right:1px solid var(--dark-3);min-height:calc(100vh - 68px);display:flex;flex-direction:column}
@@ -45,8 +70,6 @@ body.sidebar-hidden .header-nav{display:flex;gap:8px;margin-left:auto}
 .sidebar a:hover{color:var(--secondary);background:rgba(255,255,255,.04)}
 .sidebar a.active{color:#fff;background:var(--accent)}
 .main{flex:1;min-width:0}
-nav a{color:var(--text);text-decoration:none;padding:8px 16px;border-radius:var(--radius-btn);font-size:14px;font-weight:500;transition:.25s}
-nav a:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
 
 .hero{padding:100px 10% 80px;background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(147,51,234,.2) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(46,61,214,.12) 0%,transparent 60%);text-align:center}
 .hero h1{font-size:56px;font-weight:700;line-height:1.15;margin-bottom:20px}
@@ -61,11 +84,6 @@ nav a:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
 
 .content-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);padding:32px;margin-bottom:20px}
 .content-block p{color:var(--body-text);margin-bottom:12px;line-height:1.7}
-
-.objection-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);padding:24px 28px;margin-bottom:14px}
-.objection-block .q{font-weight:600;color:var(--secondary);margin-bottom:8px;font-size:15px}
-.objection-block .a{color:var(--body-text);line-height:1.7;font-size:15px}
-.objection-block .a + .a{margin-top:12px;padding-top:12px;border-top:1px solid var(--dark-3)}
 
 .collapse-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
 .collapse-header{padding:18px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:16px;transition:.25s;user-select:none}
@@ -106,7 +124,6 @@ footer a{color:var(--accent);text-decoration:none}
 .s-cat-header.open .ic-cat{color:#f59e0b}
 .collapse-header .ic{transition:.2s}
 .collapse-header:hover .ic{filter:brightness(1.2)}
-.s-cat-header .arrow{font-size:10px;transition:.25s;color:var(--text)}
 .ic-orange{color:#f59e0b}.ic-orange svg{stroke:#f59e0b}
 .ic-cyan{color:#22d3ee}.ic-cyan svg{stroke:#22d3ee}
 .ic-yellow{color:#eab308}.ic-yellow svg{stroke:#eab308}
@@ -114,8 +131,7 @@ footer a{color:var(--accent);text-decoration:none}
 .ic-blue{color:#3b82f6}.ic-blue svg{stroke:#3b82f6}
 .ic-red{color:#ef4444}.ic-red svg{stroke:#ef4444}
 .ic-purple{color:#a78bfa}.ic-purple svg{stroke:#a78bfa}
-.q-mark{display:inline;background:linear-gradient(135deg,rgba(147,51,234,.18),rgba(46,61,214,.18));border-left:3px solid var(--accent);padding:10px 16px;border-radius:0 10px 10px 0;margin:8px 0;font-weight:600;color:var(--secondary);font-size:15px;line-height:1.7}
-
+.q-mark{display:inline-block;background:rgba(147,51,234,.12);border:1px solid rgba(147,51,234,.2);padding:6px 18px;border-radius:100px;margin:4px 0;font-weight:500;color:var(--secondary);font-size:14px;line-height:1.6;letter-spacing:.3px}
 .settings-btn{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;color:var(--text);text-decoration:none;font-size:14px;font-weight:500;transition:.2s;margin-top:auto;cursor:pointer;border:none;background:none;width:100%;font-family:'Onest',sans-serif}
 .settings-btn:hover{color:var(--secondary);background:rgba(255,255,255,.04)}
 .settings-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:200;display:none;backdrop-filter:blur(4px)}
@@ -142,10 +158,112 @@ footer a{color:var(--accent);text-decoration:none}
 .settings-val{color:var(--text);font-size:13px;margin-top:6px;text-align:right}
 .sidebar-spacer{flex:1}
 
+/* ===== CUSTOM CHECKLIST ===== */
+.checklist{display:flex;flex-direction:column;gap:8px;padding:4px 0}
+.checklist label{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:10px;cursor:pointer;font-size:15px;color:var(--body-text);transition:all .25s ease;border:1px solid transparent;position:relative;user-select:none}
+.checklist label:hover{background:rgba(255,255,255,.04);border-color:var(--dark-3)}
+.checklist label.checked{color:var(--secondary);background:rgba(147,51,234,.06);border-color:rgba(147,51,234,.12)}
+.checklist label.checked .check-text{text-decoration:line-through;opacity:.6}
+.checklist input[type="checkbox"]{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.checklist .check-box{width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid var(--dark-4);background:transparent;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.checklist label:hover .check-box{border-color:var(--accent);transform:scale(1.05)}
+.checklist input[type="checkbox"]:checked + .check-box{background:var(--accent);border-color:var(--accent);transform:scale(1);animation:checkPop .3s ease}
+.checklist input[type="checkbox"]:checked + .check-box svg{opacity:1;transform:scale(1)}
+.checklist .check-box svg{width:14px;height:14px;opacity:0;transform:scale(0.5);transition:all .3s cubic-bezier(.34,1.56,.64,1);stroke:#fff;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@keyframes checkPop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+/* ===== PROGRESS BAR ===== */
+.checklist-progress{display:flex;align-items:center;gap:14px;padding:12px 0 16px;border-bottom:1px solid var(--dark-3);margin-bottom:8px}
+.checklist-progress .progress-track{flex:1;height:4px;background:var(--dark-3);border-radius:4px;overflow:hidden}
+.checklist-progress .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));border-radius:4px;width:0%;transition:width .5s ease}
+.checklist-progress .progress-text{font-size:13px;font-weight:600;color:var(--text);min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* ===== AUDIO/VIDEO PLAYER DESIGN ===== */
+.player-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.player-block:hover{border-color:rgba(147,51,234,.3);box-shadow:0 4px 24px rgba(147,51,234,.06)}
+.calls-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.calls-grid{grid-template-columns:1fr}}
+
+.audio-card{display:flex;flex-direction:column;padding:20px 24px;cursor:pointer}
+.audio-card .top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.audio-card .icon{width:44px;height:44px;border-radius:12px;background:rgba(147,51,234,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);transition:transform .3s}
+.audio-card:hover .icon{transform:scale(1.05)}
+.audio-card .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.audio-card .info{flex:1;min-width:0}
+.audio-card .info .name{font-weight:600;font-size:15px;color:var(--secondary);display:block;margin-bottom:2px}
+.audio-card .info .desc{font-size:13px;color:var(--text);display:block}
+.audio-card .info .duration{font-size:12px;color:var(--text);opacity:.7;display:block;margin-top:4px}
+.audio-card .controls{display:flex;align-items:center;gap:12px;pointer-events:auto}
+.audio-card .play-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s ease}
+.audio-card .play-btn:hover{background:var(--accent-hover);transform:scale(1.08);box-shadow:0 4px 16px rgba(147,51,234,.3)}
+.audio-card .play-btn:active{transform:scale(0.95)}
+.audio-card .play-btn svg{width:16px;height:16px;fill:currentColor;stroke:none}
+.audio-card .play-btn.playing svg{transform:translateX(0)}
+.audio-card .play-btn:not(.playing) svg{margin-left:2px}
+.audio-card .progress-wrap{flex:1;height:6px;background:var(--dark-3);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
+.audio-card .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));border-radius:3px;width:0%;transition:width .1s linear}
+.audio-card .time{font-size:12px;color:var(--text);font-variant-numeric:tabular-nums;min-width:80px;text-align:right;font-feature-settings:"tnum"}
+
+.video-card{padding:24px}
+.video-card .video-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.video-card .video-top .icon{width:44px;height:44px;border-radius:12px;background:rgba(147,51,234,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);transition:transform .3s}
+.video-card:hover .video-top .icon{transform:scale(1.05)}
+.video-card .video-top .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.video-card .video-top .info .name{font-weight:600;font-size:15px;color:var(--secondary)}
+.video-card .video-top .info .desc{font-size:13px;color:var(--text)}
+.video-card .video-wrap{position:relative;border-radius:12px;overflow:hidden;background:#000}
+.video-card .video-wrap video{width:100%;display:block;max-height:480px}
+.video-card .big-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(147,51,234,.85);border:2px solid rgba(255,255,255,.15);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s cubic-bezier(.34,1.56,.64,1);opacity:0;pointer-events:none;z-index:2;backdrop-filter:blur(4px)}
+.video-card .big-play.show{opacity:1;pointer-events:auto}
+.video-card .big-play:hover{transform:translate(-50%,-50%) scale(1.12);background:var(--accent);border-color:rgba(255,255,255,.3);box-shadow:0 0 40px rgba(147,51,234,.4)}
+.video-card .big-play:active{transform:translate(-50%,-50%) scale(0.95)}
+.video-card .big-play svg{width:26px;height:26px;fill:currentColor;stroke:none;margin-left:4px}
+.video-card .video-controls{display:flex;align-items:center;gap:12px;margin-top:12px}
+.video-card .video-controls .play-btn{width:40px;height:40px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s ease}
+.video-card .video-controls .play-btn:hover{background:var(--accent-hover);transform:scale(1.08);box-shadow:0 4px 16px rgba(147,51,234,.3)}
+.video-card .video-controls .play-btn:active{transform:scale(0.95)}
+.video-card .video-controls .play-btn svg{width:18px;height:18px;fill:currentColor;stroke:none}
+.video-card .video-controls .play-btn:not(.playing) svg{margin-left:3px}
+.video-card .video-controls .progress-wrap{flex:1;height:6px;background:var(--dark-3);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
+.video-card .video-controls .progress-wrap:hover .progress-fill{height:8px;margin-top:-1px}
+.video-card .video-controls .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-hover));border-radius:3px;width:0%;transition:height .2s,width .1s linear}
+.video-card .video-controls .time{font-size:12px;color:var(--text);font-variant-numeric:tabular-nums;min-width:100px;text-align:right;font-feature-settings:"tnum"}
+
+.video-card .sec-controls,.audio-card .sec-controls{display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px solid var(--dark-3)}
+.video-card .sec-controls .ctrl-group,.audio-card .sec-controls .ctrl-group{display:flex;align-items:center;gap:6px;color:var(--text);font-size:12px}
+.video-card .sec-controls .ctrl-group svg,.audio-card .sec-controls .ctrl-group svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.video-card .sec-controls .vol-slider,.audio-card .sec-controls .vol-slider{width:60px;height:4px;-webkit-appearance:none;appearance:none;background:var(--dark-3);border-radius:2px;outline:none;cursor:pointer;transition:height .2s}
+.video-card .sec-controls .vol-slider:hover,.audio-card .sec-controls .vol-slider:hover{height:6px}
+.video-card .sec-controls .vol-slider::-webkit-slider-thumb,.audio-card .sec-controls .vol-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--dark-2);transition:all .2s}
+.video-card .sec-controls .vol-slider::-webkit-slider-thumb:hover,.audio-card .sec-controls .vol-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.video-card .sec-controls .vol-slider::-moz-range-thumb,.audio-card .sec-controls .vol-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--dark-2)}
+.video-card .sec-controls .speed-btn,.audio-card .sec-controls .speed-btn{background:none;border:1px solid var(--dark-4);color:var(--text);font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;cursor:pointer;font-family:'Onest',sans-serif;transition:all .25s ease;min-width:36px;text-align:center}
+.video-card .sec-controls .speed-btn:hover,.audio-card .sec-controls .speed-btn:hover{border-color:var(--accent);color:var(--secondary);background:rgba(147,51,234,.08)}
+.video-card .sec-controls .speed-btn:active,.audio-card .sec-controls .speed-btn:active{transform:scale(0.95)}
+.video-card .sec-controls .dload-btn,.audio-card .sec-controls .dload-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:6px 8px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .25s ease;margin-left:auto}
+.video-card .sec-controls .dload-btn:hover,.audio-card .sec-controls .dload-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06);transform:scale(1.08)}
+.video-card .sec-controls .dload-btn:active,.audio-card .sec-controls .dload-btn:active{transform:scale(0.95)}
+.video-card .sec-controls .fs-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:6px 8px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .25s ease}
+.video-card .sec-controls .fs-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06);transform:scale(1.08)}
+.video-card .sec-controls .fs-btn:active{transform:scale(0.95)}
+.video-card .sec-controls .fs-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.video-card .sec-controls .fs-btn.is-fullscreen{color:var(--accent)}
+.video-card .sec-controls .fs-btn.is-fullscreen:hover{color:var(--accent-hover);background:rgba(147,51,234,.12)}
+.video-card .video-wrap .fs-overlay-btn{position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,.6);border:none;color:#fff;padding:8px 10px;border-radius:8px;cursor:pointer;opacity:0;transition:all .3s ease;z-index:5;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.08)}
+.video-card .video-wrap:hover .fs-overlay-btn{opacity:1}
+.video-card .video-wrap .fs-overlay-btn:hover{background:rgba(0,0,0,.8);transform:scale(1.08)}
+.video-card .video-wrap .fs-overlay-btn:active{transform:scale(0.95)}
+.video-card .video-wrap .fs-overlay-btn svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.audio-card .controls{margin-bottom:10px}
+video::-webkit-media-controls{display:none!important}
+video::-moz-media-controls{display:none!important}
+video::-ms-media-controls{display:none!important}
+video::-webkit-media-controls-enclosure{display:none!important}
+
 /* theme overrides */
 body.light{--primary:#f8f8f8;--secondary:#1a1a2e;--text:#555;--body-text:#222;--dark-2:#fff;--dark-3:#e5e7eb;--dark-4:#d1d5db}
 body.light .hero{background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(147,51,234,.08) 0%,transparent 70%)}
-body.light .content-block,body.light .script-layout,body.light .objection-block,body.light .collapse-block,body.light .settings-panel,body.light .settings-panel-header{background:#fff}
+body.light .content-block,body.light .script-layout,body.light .collapse-block,body.light .settings-panel,body.light .settings-panel-header{background:#fff}
 body.light .script-sidebar{background:#f9fafb}
 body.light input{background:#fff;color:#1a1a2e}
 body.light .sidebar a:hover{color:#1a1a2e;background:rgba(0,0,0,.04)}
@@ -156,11 +274,14 @@ body.contrast .hero{background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(
 body.contrast .q-mark{border-left-color:var(--accent)}
 
 @media(max-width:768px){
-  header{padding:0 16px}
-  .logo{font-size:18px;height:24px}
+  header{padding:0 16px;gap:10px;flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:10px}
+  .header-search{order:3;flex:1 1 100%;max-width:100%;margin:0}
+  .header-search input{font-size:13px;padding:6px 16px}
+  .header-search .search-stats{right:auto;left:0}
+  .logo{font-size:18px}
   .logo img{height:24px}
-  nav{gap:4px;overflow-x:auto}
-  nav a{font-size:12px;padding:6px 12px;white-space:nowrap}
+  .header-nav{gap:4px;flex-wrap:wrap}
+  .header-nav a{font-size:12px;padding:6px 12px;white-space:nowrap}
   .hero{padding:60px 20px 50px}
   .hero h1{font-size:32px}
   .section{padding:40px 20px}
@@ -180,71 +301,8 @@ body.sidebar-top .sidebar{width:100%;min-height:auto;position:static;border-righ
 body.sidebar-top .sidebar a{white-space:nowrap;margin-bottom:0}
 body.sidebar-top .sidebar .sidebar-spacer{display:none}
 body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto}
-
-/* audio/video player design */
-.player-block{background:var(--dark-2);border:1px solid var(--dark-3);border-radius:var(--radius);overflow:hidden;transition:border-color .3s}
-.player-block:hover{border-color:rgba(147,51,234,.3)}
-.calls-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:900px){.calls-grid{grid-template-columns:1fr}}
-
-.audio-card{display:flex;flex-direction:column;padding:20px 24px}
-.audio-card .top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
-.audio-card .icon{width:44px;height:44px;border-radius:12px;background:rgba(147,51,234,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
-.audio-card .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.audio-card .info{flex:1;min-width:0}
-.audio-card .info .name{font-weight:600;font-size:15px;color:var(--secondary);display:block;margin-bottom:2px}
-.audio-card .info .desc{font-size:13px;color:var(--text);display:block}
-.audio-card .info .duration{font-size:12px;color:var(--text);opacity:.7;display:block;margin-top:4px}
-
-.audio-card .controls{display:flex;align-items:center;gap:12px}
-.audio-card .play-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
-.audio-card .play-btn:hover{background:var(--accent-hover);transform:scale(1.05)}
-.audio-card .play-btn svg{width:16px;height:16px;fill:currentColor;stroke:none}
-.audio-card .play-btn.playing svg{transform:translateX(0)}
-.audio-card .play-btn:not(.playing) svg{margin-left:2px}
-.audio-card .progress-wrap{flex:1;height:6px;background:var(--dark-3);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
-.audio-card .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#a855f7);border-radius:3px;width:0;transition:width .1s linear}
-.audio-card .time{font-size:12px;color:var(--text);font-variant-numeric:tabular-nums;min-width:80px;text-align:right}
-
-.video-card{padding:24px}
-.video-card .video-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.video-card .video-top .icon{width:44px;height:44px;border-radius:12px;background:rgba(147,51,234,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
-.video-card .video-top .icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.video-card .video-top .info .name{font-weight:600;font-size:15px;color:var(--secondary)}
-.video-card .video-top .info .desc{font-size:13px;color:var(--text)}
-.video-card video{width:100%;border-radius:12px;background:#000;display:block;max-height:480px}
-.video-card .video-controls{display:flex;align-items:center;gap:12px;margin-top:12px}
-.video-card .video-controls .play-btn{width:40px;height:40px;border-radius:50%;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
-.video-card .video-controls .play-btn:hover{background:var(--accent-hover);transform:scale(1.05)}
-.video-card .video-controls .play-btn svg{width:18px;height:18px;fill:currentColor;stroke:none}
-.video-card .video-controls .play-btn:not(.playing) svg{margin-left:3px}
-.video-card .video-controls .progress-wrap{flex:1;height:6px;background:var(--dark-3);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
-.video-card .video-controls .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#a855f7);border-radius:3px;width:0;transition:width .1s linear}
-.video-card .video-controls .time{font-size:12px;color:var(--text);font-variant-numeric:tabular-nums;min-width:100px;text-align:right}
-
-.video-card .video-wrap{position:relative;border-radius:12px;overflow:hidden;background:#000}
-.video-card .video-wrap video{width:100%;display:block;max-height:480px}
-.video-card .big-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(147,51,234,.85);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;opacity:0;pointer-events:none;z-index:2}
-.video-card .big-play.show{opacity:1;pointer-events:auto}
-.video-card .big-play:hover{transform:translate(-50%,-50%) scale(1.08)}
-.video-card .big-play svg{width:26px;height:26px;fill:currentColor;stroke:none;margin-left:4px}
-.video-card .sec-controls,.audio-card .sec-controls{display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px solid var(--dark-3)}
-.video-card .sec-controls .ctrl-group,.audio-card .sec-controls .ctrl-group{display:flex;align-items:center;gap:6px;color:var(--text);font-size:12px}
-.video-card .sec-controls .ctrl-group svg,.audio-card .sec-controls .ctrl-group svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-.video-card .sec-controls .vol-slider,.audio-card .sec-controls .vol-slider{width:60px;height:4px;-webkit-appearance:none;background:var(--dark-3);border-radius:2px;outline:none;cursor:pointer}
-.video-card .sec-controls .vol-slider::-webkit-slider-thumb,.audio-card .sec-controls .vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
-.video-card .sec-controls .vol-slider::-moz-range-thumb,.audio-card .sec-controls .vol-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
-.video-card .sec-controls .speed-btn,.audio-card .sec-controls .speed-btn{background:none;border:1px solid var(--dark-4);color:var(--text);font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;cursor:pointer;font-family:'Onest',sans-serif;transition:.2s;min-width:36px;text-align:center}
-.video-card .sec-controls .speed-btn:hover,.audio-card .sec-controls .speed-btn:hover{border-color:var(--accent);color:var(--secondary)}
-.video-card .sec-controls .dload-btn,.audio-card .sec-controls .dload-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:4px;border-radius:6px;display:flex;transition:.2s;margin-left:auto}
-.video-card .sec-controls .dload-btn:hover,.audio-card .sec-controls .dload-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
-.video-card .sec-controls .fs-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:4px;border-radius:6px;display:flex;transition:.2s}
-.video-card .sec-controls .fs-btn:hover{color:var(--secondary);background:rgba(255,255,255,.06)}
-.audio-card .controls{margin-bottom:10px}
-video::-webkit-media-controls{display:none!important}
-video::-moz-media-controls{display:none!important}
-video::-ms-media-controls{display:none!important}
 </style>
+</head>
 <body>
 
 <header>
@@ -252,12 +310,25 @@ video::-ms-media-controls{display:none!important}
     <img src="logo_geoads.svg" alt="GeoAds">
     <span>Wiki</span>
   </a>
+  
+  <!-- Поиск по центру -->
+  <div class="header-search">
+    <div class="search-wrapper">
+      <span class="search-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="Поиск по скриптам и возражениям...">
+      <span class="search-clear" id="searchClear" onclick="clearSearch()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </span>
+    </div>
+    <div class="search-stats" id="searchStats">
+      <span class="search-count" id="searchCount">0</span>
+      <span class="search-total" id="searchTotal">/0</span>
+    </div>
+  </div>
+  
   <nav class="header-nav">
-    <a href="#scripts">Скрипт</a>
-    <a href="#short">Возражения</a>	
-    <a href="#meeting">Встреча</a>	
-    <a href="#calls">Звонки</a>
-    <a href="#video">Видео</a>
     <button class="header-settings-btn" onclick="toggleSettings()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </button>
@@ -286,7 +357,7 @@ video::-ms-media-controls{display:none!important}
 
 <section class="section" id="scripts">
   <div class="section-header fade-in">
-    <span class="badge">скрипты</span>
+    <span class="badge">Скрипты</span>
     <h2>Скрипт</h2>
   </div>
 
@@ -314,8 +385,8 @@ video::-ms-media-controls{display:none!important}
 
     <div class="script-content">
       <div class="script-page active" id="page-auto-paid">
-        <p>Ало, да (имя лпр) здравствуйте!</p>
-        <p>Это____ . Звоню по поводу вашего автосервиса____ на счёт Яндекс.Карт.<br>
+        <p><span class="q-mark">Ало, да (имя лпр) здравствуйте!</span></p>
+        <p>Это <span class="manager-placeholder">____</span>. Звоню по поводу вашего автосервиса <span class="company-placeholder">____</span> на счёт Яндекс.Карт.<br>
         Смотрите, у вас сейчас Яндекс.Бизнес к карточке подключен, но вот автосервис перестал в выдаче по некоторым запросам выходить: по ТО и по ремонту двигателя.</p>
         <p><span class="q-mark">Подскажите, у вас же есть эти направления?</span></p>
         <p>(ждём ответ)</p>
@@ -328,14 +399,14 @@ video::-ms-media-controls{display:none!important}
         <p>Мы в этом профессионалы, работаем, как с дилерскими автосервисами, так и с федеральными сетями, может знаете Мотюль Гараж, Колеса Даром, Зимверк - мы ведем, ну и также с локальными сервисами.</p>
         <p>Поэтому на встрече все покажем и расскажем, если понравиться - посотрудничаем.<br>
         Даже если вы не купите - вы все равно получите много очень полезной информации!</p>
-        <p><span class="q-mark">Подскажите, завтра в 14 будет удобно?</span></p>
+        <p><span class="q-mark">Подскажите, завтра в <span class="time-placeholder">__</span> будет удобно?</span></p>
         <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
-        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарь, чтобы не забыть.</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на <span class="time-placeholder">__</span>. Запишите, пожалуйста, в календарь, чтобы не забыть.</p>
         <p>До встречи!</p>
       </div>
 
       <div class="script-page" id="page-auto-free">
-        <p>Ало, да (имя лпр) здравствуйте! Это____ . Звоню по поводу вашего автосервиса____ .</p>
+        <p><span class="q-mark">Ало, да (имя лпр) здравствуйте!</span> Это <span class="manager-placeholder">____</span>. Звоню по поводу вашего автосервиса <span class="company-placeholder">____</span>.</p>
         <p><span class="q-mark">Подскажите, а кто у вас сейчас за актуализацию информации на Яндекс картах отвечает?</span><br>
         Ага, понял(а), там просто автосервис перестала в выдаче по некоторым запросам выходить _______ Это связано с большим обновлением Яндекса, там изменились алгоритмы Y1.</p>
         <p>У вас просто карточка сейчас ведется не согласно именно обновленным алгоритмам, поэтому вы и не выходите у потенциальных клиентов.</p>
@@ -344,15 +415,15 @@ video::-ms-media-controls{display:none!important}
         <p>Тут просто смотрите какой момент, если сейчас нужны вам клиенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как будем карточку вести, чтобы вы были в ТОП-е.</p>
         <p>Поэтому на встрече все покажем и расскажем, если понравиться- посотрудничаем.<br>
         Даже если вы не купите - вы все равно получите много очень полезной информации!</p>
-        <p><span class="q-mark">Подскажите, завтра в 14 будет удобно?</span></p>
+        <p><span class="q-mark">Подскажите, завтра в <span class="time-placeholder">__</span> будет удобно?</span></p>
         <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
-        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на <span class="time-placeholder">__</span>. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
         <p>До встречи!</p>
       </div>
 
       <div class="script-page" id="page-dent-paid">
-        <p>Ало, да (имя лпр) здравствуйте!</p>
-        <p>Это____ . Звоню по поводу вашей стоматологии ____ на счёт Яндекс.Карт.<br>
+        <p><span class="q-mark">Ало, да (имя лпр) здравствуйте!</span></p>
+        <p>Это <span class="manager-placeholder">____</span>. Звоню по поводу вашей стоматологии <span class="company-placeholder">____</span> на счёт Яндекс.Карт.<br>
         Смотрите, у вас сейчас Яндекс.Бизнес к карточке подключен, но вот стоматология перестала в выдаче по некоторым запросам выходить: по имплантации и по ортодонтии по всем ключевикам соответственно. Также на текущий момент вы не выходите и в новых продуктах Яндекса: Алиса АI и Яндекс.Медицина.</p>
         <p>Подскажите, пожалуйста, а карточкой вы сами занимаетесь или помогает кто-то?</p>
         <p>(ждём ответ)</p>
@@ -361,15 +432,15 @@ video::-ms-media-controls{display:none!important}
         <p>Ну вот если кратенько пробежаться… (кратко перечисляем что не так)</p>
         <p>Тут просто смотрите какой момент, если сейчас нужны вам пациенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как будем карточку вести, чтобы вы были в ТОП-е.</p>
         <p>Мы в этом профессионалы, у нас более 600 стоматологий, работаем с Арамом Давидяном (первый элайнеры завез), Луиза Автандилян, сейчас сообщество стоматологов с ней делаем, МИНЗДРАВ и многие другие.</p>
-        <p>Подскажите, завтра в 14 будет удобно?</p>
+        <p>Подскажите, завтра в <span class="time-placeholder">__</span> будет удобно?</p>
         <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
-        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на <span class="time-placeholder">__</span>. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
         <p>До встречи!</p>
       </div>
 
       <div class="script-page" id="page-dent-free">
-        <p>Ало, да (имя лпр) здравствуйте!</p>
-        <p>Это____ . Звоню по поводу вашей стоматологии ____ .<br>
+        <p><span class="q-mark">Ало, да (имя лпр) здравствуйте!</span></p>
+        <p>Это <span class="manager-placeholder">____</span>. Звоню по поводу вашей стоматологии <span class="company-placeholder">____</span>.<br>
         <span class="q-mark">Подскажите, а кто у вас сейчас за актуализацию информации на Яндекс картах отвечает?</span></p>
         <p>(ждём ответ)</p>
         <p>Ага, понял(а), там просто стоматология перестала в выдаче по некоторым запросам выходить: по имплантации и по ортодонтии по всем ключевикам. Также на текущий момент вы не выходите и в новых продуктах Яндекса: Алиса АI и в Яндекс.Медицине.</p>
@@ -380,9 +451,9 @@ video::-ms-media-controls{display:none!important}
         <p>Тут просто смотрите какой момент, если сейчас нужны вам пациенты с карт, чтобы вы все таки высоко ранжировались по всем направлениям я предлагаю встретиться онлайн минут на 40, мы разберем вашу карточку, покажем обновленные алгоритмы и расскажем как будем карточку вести, чтобы вы были в ТОП-е.</p>
         <p>Поэтому на встрече все покажем и расскажем, если понравиться- посотрудничаем.<br>
         Даже если вы не купите - вы все равно получите много очень полезной информации!</p>
-        <p><span class="q-mark">Подскажите, завтра в 14 будет удобно?</span></p>
+        <p><span class="q-mark">Подскажите, завтра в <span class="time-placeholder">__</span> будет удобно?</span></p>
         <p>Ага, финальный момент, подскажите, пожалуйста, вы единственный, кто решение принимает по бюджетам и сотрудничеству или надо кого-то подключить еще к конференции?</p>
-        <p>Супер, тогда я бронирую временной слот за менеджером на __. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
+        <p>Супер, тогда я бронирую временной слот за менеджером на <span class="time-placeholder">__</span>. Запишите, пожалуйста, в календарик, чтобы не забыть.</p>
         <p>До встречи!</p>
       </div>
     </div>
@@ -450,33 +521,91 @@ video::-ms-media-controls{display:none!important}
 
 <section class="section" id="meeting">
   <div class="section-header fade-in">
-    <span class="badge">встреча + регламент</span>
-    <h2>Встреча + Регламент Подтверждения</h2>
+    <span class="badge">Встреча + Чекбокс</span>
+    <h2>Встреча + Чекбокс</h2>
   </div>
 
   <div class="content-block fade-in">
     <p>Здравствуйте!<br>
-    Это __, напоминаю о согласованной встрече сегодня в __. Мы временной слот за менеджером зарезервировали под встречу, ближе к этому времени ссылочку на конференцию отправим. Напомните, пожалуйста, куда удобнее Макс или тг?</p>
+    Это <span class="manager-placeholder">__</span>, напоминаю о согласованной встрече сегодня в <span class="time-placeholder">__</span>. Мы временной слот за менеджером зарезервировали под встречу, ближе к этому времени ссылочку на конференцию отправим. Напомните, пожалуйста, куда удобнее Макс или тг?</p>
   </div>
 
-  <div class="content-block fade-in">
-    <h3 style="font-size:18px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--dark-3);color:var(--secondary)">РЕГЛАМЕНТ ПОДТВЕРЖДЕНИЯ И ПЕРЕДАЧИ СДЕЛКИ</h3>
-    <ol style="color:var(--body-text);line-height:2.2;padding-left:20px;list-style:decimal">
-      <li>Подтвердили встречу</li>
-      <li>Отправили в чат в битриксе «ТЕЛЕМАРКЕТИНГ»</li>
-      <li>Увидели, кто из РГ встречу берет</li>
-      <li>Завершили обработку Лида - создать на основании СДЕЛКУ</li>
-      <li>Внесли всю необходимую информацию</li>
-      <li>Открывается СДЕЛКА</li>
-      <li>Поставили наблюдателей: себя и своего РГ</li>
-      <li>Поменяли ответственного на РГ Коммерции, который в чате отписался, что берет встречу</li>
-    </ol>
+<div class="content-block fade-in">
+  <h3 style="font-size:18px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--dark-3);color:var(--secondary)">РЕГЛАМЕНТ ПОДТВЕРЖДЕНИЯ И ПЕРЕДАЧИ СДЕЛКИ</h3>
+  
+  <!-- Прогресс-бар -->
+  <div class="checklist-progress">
+    <span style="font-size:13px;color:var(--text);font-weight:500">Выполнено</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="checklistProgress"></div>
+    </div>
+    <span class="progress-text" id="checklistCount">0/8</span>
   </div>
+
+  <div class="checklist">
+    <label>
+      <input type="checkbox" data-check="1">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Подтвердил(а) встречу</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="2">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Отправил(а) в чат в битриксе «ТЕЛЕМАРКЕТИНГ»</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="3">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Увидел(а), кто из РГ встречу берет</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="4">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Завершил(а) обработку Лида — создать на основании СДЕЛКУ</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="5">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Внес(ла) всю необходимую информацию</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="6">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Открывается СДЕЛКА</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="7">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Поставил(а) наблюдателей: себя и своего РГ</span>
+    </label>
+    <label>
+      <input type="checkbox" data-check="8">
+      <span class="check-box">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <span class="check-text">Поменял(а) ответственного на РГ Коммерции, который в чате отписался, что берет встречу</span>
+    </label>
+  </div>
+</div>
 </section>
 
 <section class="section" id="calls">
   <div class="section-header fade-in">
-    <span class="badge">аудио</span>
+    <span class="badge">Аудио</span>
     <h2>Примеры звонков</h2>
     <p>Реальные разговоры с клиентами. Слушайте и перенимайте лучшие приёмы.</p>
   </div>
@@ -492,8 +621,8 @@ video::-ms-media-controls{display:none!important}
         </div>
       </div>
       <div class="controls">
-        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seek(event,this)">
+        <button class="play-btn" onclick="event.stopPropagation();togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="event.stopPropagation();seek(event,this)">
           <div class="progress-fill"></div>
         </div>
         <span class="time">0:00 / 0:00</span>
@@ -509,8 +638,8 @@ video::-ms-media-controls{display:none!important}
         </div>
       </div>
       <div class="controls">
-        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seek(event,this)">
+        <button class="play-btn" onclick="event.stopPropagation();togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="event.stopPropagation();seek(event,this)">
           <div class="progress-fill"></div>
         </div>
         <span class="time">0:00 / 0:00</span>
@@ -526,8 +655,8 @@ video::-ms-media-controls{display:none!important}
         </div>
       </div>
       <div class="controls">
-        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seek(event,this)">
+        <button class="play-btn" onclick="event.stopPropagation();togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="event.stopPropagation();seek(event,this)">
           <div class="progress-fill"></div>
         </div>
         <span class="time">0:00 / 0:00</span>
@@ -543,8 +672,8 @@ video::-ms-media-controls{display:none!important}
         </div>
       </div>
       <div class="controls">
-        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seek(event,this)">
+        <button class="play-btn" onclick="event.stopPropagation();togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="event.stopPropagation();seek(event,this)">
           <div class="progress-fill"></div>
         </div>
         <span class="time">0:00 / 0:00</span>
@@ -560,8 +689,8 @@ video::-ms-media-controls{display:none!important}
         </div>
       </div>
       <div class="controls">
-        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seek(event,this)">
+        <button class="play-btn" onclick="event.stopPropagation();togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="event.stopPropagation();seek(event,this)">
           <div class="progress-fill"></div>
         </div>
         <span class="time">0:00 / 0:00</span>
@@ -577,8 +706,8 @@ video::-ms-media-controls{display:none!important}
         </div>
       </div>
       <div class="controls">
-        <button class="play-btn" onclick="togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-        <div class="progress-wrap" onclick="seek(event,this)">
+        <button class="play-btn" onclick="event.stopPropagation();togglePlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="event.stopPropagation();seek(event,this)">
           <div class="progress-fill"></div>
         </div>
         <span class="time">0:00 / 0:00</span>
@@ -603,7 +732,7 @@ video::-ms-media-controls{display:none!important}
       </div>
     </div>
     <div class="video-wrap">
-      <video id="mainVideo" controls preload="metadata" playsinline src="video/%D0%93%D0%95%D0%9E%D0%AD%D0%94%D0%A1.mp4" onclick="toggleVidPlay()"></video>
+      <video id="mainVideo" preload="metadata" playsinline src="video/ГЕОЭДС.mp4" onclick="toggleVidPlay()"></video>
       <button class="big-play" id="bigPlayBtn" onclick="event.stopPropagation();toggleVidPlay()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
     </div>
     <div class="video-controls">
@@ -632,7 +761,6 @@ video::-ms-media-controls{display:none!important}
 </section>
 
 </div>
-
 </div>
 
 <div class="settings-overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
@@ -642,6 +770,17 @@ video::-ms-media-controls{display:none!important}
     <button class="settings-close" onclick="toggleSettings()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="settings-body">
+  <div class="settings-group">
+  <label>Данные</label>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <input type="text" id="settingsManagerName" placeholder="Ваше имя" 
+           style="padding:10px 16px;border-radius:8px;border:1px solid var(--dark-3);background:var(--primary);color:var(--secondary);font-family:'Onest',sans-serif;font-size:14px">
+    <input type="text" id="settingsCompanyName" placeholder="Название компании" 
+           style="padding:10px 16px;border-radius:8px;border:1px solid var(--dark-3);background:var(--primary);color:var(--secondary);font-family:'Onest',sans-serif;font-size:14px">
+    <input type="text" id="settingsTime" placeholder="Время" 
+           style="padding:10px 16px;border-radius:8px;border:1px solid var(--dark-3);background:var(--primary);color:var(--secondary);font-family:'Onest',sans-serif;font-size:14px">
+  </div>
+</div>
     <div class="settings-group">
       <label>Масштаб</label>
       <input type="range" class="settings-slider" id="zoomSlider" min="75" max="150" value="100" oninput="setZoom(this.value)">
@@ -706,8 +845,435 @@ video::-ms-media-controls{display:none!important}
   <p><a href="https://geoads-ai.ru" target="_blank">geoads-ai.ru</a></p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/color-thief@2.2.0/dist/color-thief.min.js"></script>
 <script>
+// ========== PERSONALIZATION ==========
+function updatePlaceholders() {
+  const manager = document.getElementById('settingsManagerName').value || '____';
+  const company = document.getElementById('settingsCompanyName').value || '____';
+  const time = document.getElementById('settingsTime').value || '____';
+  
+  document.querySelectorAll('.manager-placeholder').forEach(el => el.textContent = manager);
+  document.querySelectorAll('.company-placeholder').forEach(el => el.textContent = company);
+  document.querySelectorAll('.time-placeholder').forEach(el => el.textContent = time);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedManager = localStorage.getItem('wiki_manager_name') || '';
+  const savedCompany = localStorage.getItem('wiki_company_name') || '';
+  const savedTime = localStorage.getItem('wiki_time') || '';
+  
+  const managerInput = document.getElementById('settingsManagerName');
+  const companyInput = document.getElementById('settingsCompanyName');
+  const timeInput = document.getElementById('settingsTime');
+  
+  if (managerInput) {
+    managerInput.value = savedManager;
+    managerInput.addEventListener('input', function() {
+      localStorage.setItem('wiki_manager_name', this.value);
+      updatePlaceholders();
+    });
+  }
+  
+  if (companyInput) {
+    companyInput.value = savedCompany;
+    companyInput.addEventListener('input', function() {
+      localStorage.setItem('wiki_company_name', this.value);
+      updatePlaceholders();
+    });
+  }
+  
+  if (timeInput) {
+    timeInput.value = savedTime;
+    timeInput.addEventListener('input', function() {
+      localStorage.setItem('wiki_time', this.value);
+      updatePlaceholders();
+    });
+  }
+  
+  updatePlaceholders();
+});
+
+// ========== SEARCH ==========
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+const searchStats = document.getElementById('searchStats');
+const searchCount = document.getElementById('searchCount');
+const searchTotal = document.getElementById('searchTotal');
+let searchActive = false;
+
+function clearSearch() {
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input'));
+    searchInput.focus();
+  }
+}
+
+if (searchInput) {
+  searchInput.addEventListener('input', function() {
+    if (searchClear) {
+      searchClear.classList.toggle('visible', this.value.length > 0);
+    }
+    performSearch(this.value);
+  });
+  
+  searchInput.addEventListener('focus', function() {
+    if (searchActive && searchStats) {
+      searchStats.classList.add('visible');
+    }
+  });
+  
+  searchInput.addEventListener('blur', function() {
+    setTimeout(() => {
+      if (searchStats) searchStats.classList.remove('visible');
+    }, 200);
+  });
+}
+
+function performSearch(query) {
+  query = query.toLowerCase().trim();
+  let totalFound = 0;
+  let totalAll = 0;
+  
+  // Получаем родительский контейнер .main
+  const mainContainer = document.querySelector('.main');
+  
+  // ===== 1. СБРАСЫВАЕМ ВСЁ =====
+  // Снимаем подсветку
+  document.querySelectorAll('.script-page, .collapse-block, .section').forEach(function(el) {
+    removeHighlight(el);
+  });
+  
+  // Показываем все секции
+  document.querySelectorAll('.section').forEach(function(section) {
+    section.style.display = '';
+  });
+  
+  if (query.length === 0) {
+    // Если поиск пустой — показываем всё
+    document.querySelectorAll('.script-page').forEach(function(page) {
+      page.style.display = '';
+      page.classList.remove('active');
+    });
+    // Активируем первый скрипт
+    const firstPage = document.querySelector('.script-page');
+    if (firstPage) firstPage.classList.add('active');
+    
+    document.querySelectorAll('.collapse-block').forEach(function(block) {
+      block.style.display = '';
+      const header = block.querySelector('.collapse-header');
+      const body = block.querySelector('.collapse-body');
+      header.classList.remove('open');
+      body.classList.remove('open');
+    });
+    
+    document.querySelectorAll('.s-cat').forEach(function(cat) {
+      cat.style.display = '';
+    });
+    document.querySelectorAll('.s-item').forEach(function(item) {
+      item.style.display = '';
+    });
+    // Активируем первый пункт
+    const firstItem = document.querySelector('.s-item');
+    if (firstItem) firstItem.classList.add('active');
+    
+    // Скрываем статистику
+    if (searchStats) searchStats.classList.remove('visible');
+    searchActive = false;
+    return;
+  }
+  
+  // ===== 2. ПОИСК В СКРИПТАХ =====
+  const scriptPages = document.querySelectorAll('.script-page');
+  let foundScripts = [];
+  let foundAny = false;
+  
+  scriptPages.forEach(function(page) {
+    const text = page.textContent.toLowerCase();
+    const isMatch = text.includes(query);
+    
+    if (isMatch) {
+      foundScripts.push(page);
+      page.style.display = 'block';
+      highlightText(page, query);
+      totalFound++;
+      foundAny = true;
+    } else {
+      page.style.display = 'none';
+    }
+    totalAll++;
+  });
+  
+  // ===== 3. ПОИСК В ВОЗРАЖЕНИЯХ =====
+  const collapseBlocks = document.querySelectorAll('.collapse-block');
+  let foundObjects = [];
+  
+  collapseBlocks.forEach(function(block) {
+    const text = block.textContent.toLowerCase();
+    const isMatch = text.includes(query);
+    const header = block.querySelector('.collapse-header');
+    const body = block.querySelector('.collapse-body');
+    
+    if (isMatch) {
+      foundObjects.push(block);
+      block.style.display = 'block';
+      header.classList.add('open');
+      body.classList.add('open');
+      highlightText(block, query);
+      totalFound++;
+      foundAny = true;
+    } else {
+      block.style.display = 'none';
+      header.classList.remove('open');
+      body.classList.remove('open');
+    }
+    totalAll++;
+  });
+  
+  // ===== 4. СКРЫВАЕМ СЕКЦИИ, ГДЕ НЕТ РЕЗУЛЬТАТОВ =====
+  document.querySelectorAll('.section').forEach(function(section) {
+    // Проверяем, есть ли в этой секции видимые элементы
+    const visibleScripts = section.querySelectorAll('.script-page[style*="display: block"]');
+    const visibleObjects = section.querySelectorAll('.collapse-block[style*="display: block"]');
+    const visibleItems = section.querySelectorAll('.s-item[style*="display: block"]');
+    
+    // Если в секции нет видимых элементов — скрываем всю секцию
+    if (visibleScripts.length === 0 && visibleObjects.length === 0) {
+      // Проверяем, это секция скриптов или возражений
+      const hasScripts = section.querySelector('.script-layout');
+      const hasObjects = section.querySelector('.collapse-block');
+      
+      if (hasScripts && visibleScripts.length === 0) {
+        section.style.display = 'none';
+      } else if (hasObjects && visibleObjects.length === 0) {
+        section.style.display = 'none';
+      } else {
+        // Если это другие секции (встреча, звонки, видео) — показываем всегда
+        section.style.display = '';
+      }
+    } else {
+      section.style.display = '';
+    }
+  });
+  
+  // ===== 5. ФИЛЬТРАЦИЯ КАТЕГОРИЙ В САЙДБАРЕ =====
+  document.querySelectorAll('.s-cat').forEach(function(cat) {
+    const items = cat.querySelectorAll('.s-item');
+    let hasVisibleItem = false;
+    
+    items.forEach(function(item) {
+      // Находим соответствующую страницу
+      const onclickAttr = item.getAttribute('onclick');
+      let page = null;
+      if (onclickAttr) {
+        const match = onclickAttr.match(/page-([a-z-]+)/);
+        if (match) {
+          page = document.getElementById('page-' + match[1]);
+        }
+      }
+      
+      // Если страница существует и видима — показываем пункт
+      if (page && page.style.display !== 'none') {
+        item.style.display = 'block';
+        hasVisibleItem = true;
+      } else {
+        item.style.display = 'none';
+        item.classList.remove('active');
+      }
+    });
+    
+    // Если есть видимые пункты — показываем категорию
+    cat.style.display = hasVisibleItem ? '' : 'none';
+  });
+  
+  // ===== 6. АКТИВИРУЕМ ПЕРВЫЙ НАЙДЕННЫЙ СКРИПТ =====
+  // Сначала деактивируем все
+  document.querySelectorAll('.script-page').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.querySelectorAll('.s-item').forEach(function(item) {
+    item.classList.remove('active');
+  });
+  
+  if (foundScripts.length > 0) {
+    // Активируем первый найденный скрипт
+    foundScripts[0].classList.add('active');
+    
+    // Активируем соответствующий пункт в сайдбаре
+    document.querySelectorAll('.s-item').forEach(function(item) {
+      const onclickAttr = item.getAttribute('onclick');
+      if (onclickAttr) {
+        const match = onclickAttr.match(/page-([a-z-]+)/);
+        if (match) {
+          const targetPage = document.getElementById('page-' + match[1]);
+          if (targetPage === foundScripts[0]) {
+            item.classList.add('active');
+          }
+        }
+      }
+    });
+  }
+  
+  // ===== 7. ЕСЛИ НИЧЕГО НЕ НАЙДЕНО =====
+  if (totalFound === 0 && query.length > 0) {
+    // Показываем сообщение "Ничего не найдено"
+    // (можно добавить позже)
+  }
+  
+  // ===== 8. ОБНОВЛЯЕМ СТАТИСТИКУ =====
+  searchActive = query.length > 0 && totalFound > 0;
+  
+  if (searchCount) searchCount.textContent = totalFound;
+  if (searchTotal) searchTotal.textContent = '/' + totalAll;
+  
+  if (searchStats) {
+    if (query.length > 0) {
+      searchStats.classList.add('visible');
+    } else {
+      searchStats.classList.remove('visible');
+    }
+  }
+}
+
+// ===== ПОДСВЕТКА ТЕКСТА =====
+function highlightText(element, query) {
+  removeHighlight(element);
+  
+  const walker = document.createTreeWalker(
+    element,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode: function(node) {
+        if (node.parentElement.closest('.search-highlight')) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        if (node.parentElement.tagName === 'INPUT' || 
+            node.parentElement.tagName === 'TEXTAREA' ||
+            node.parentElement.closest('.s-item') ||
+            node.parentElement.closest('.s-cat-header')) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+  );
+  
+  const nodesToReplace = [];
+  let node;
+  while (node = walker.nextNode()) {
+    const text = node.textContent;
+    const regex = new RegExp(`(${query})`, 'gi');
+    if (regex.test(text)) {
+      nodesToReplace.push(node);
+    }
+  }
+  
+  nodesToReplace.forEach(function(node) {
+    const parent = node.parentNode;
+    const text = node.textContent;
+    const fragment = document.createDocumentFragment();
+    let lastIndex = 0;
+    
+    const regex = new RegExp(`(${query})`, 'gi');
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const mark = document.createElement('span');
+      mark.className = 'search-highlight';
+      mark.textContent = match[0];
+      fragment.appendChild(mark);
+      lastIndex = regex.lastIndex;
+    }
+    if (lastIndex < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+    
+    parent.replaceChild(fragment, node);
+  });
+}
+
+function removeHighlight(element) {
+  element.querySelectorAll('.search-highlight').forEach(function(mark) {
+    const parent = mark.parentNode;
+    const text = document.createTextNode(mark.textContent);
+    parent.replaceChild(text, mark);
+    parent.normalize();
+  });
+}
+
+// ===== ГОРЯЧИЕ КЛАВИШИ =====
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+    e.preventDefault();
+    if (searchInput) {
+      searchInput.focus();
+      searchInput.select();
+    }
+  }
+  
+  if (e.key === 'Escape' && searchInput && document.activeElement === searchInput) {
+    clearSearch();
+    searchInput.blur();
+  }
+});
+
+// ========== SMART NAVIGATION ==========
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.sidebar a');
+
+const sectionObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      navLinks.forEach(function(link) {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(function(section) {
+  sectionObserver.observe(section);
+});
+
+// ========== CHECKLIST WITH SAVE & PROGRESS ==========
+function updateChecklistProgress() {
+  const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+  const total = checkboxes.length;
+  const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+  const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+  
+  const fill = document.getElementById('checklistProgress');
+  const count = document.getElementById('checklistCount');
+  if (fill) fill.style.width = pct + '%';
+  if (count) count.textContent = checked + '/' + total;
+}
+
+document.querySelectorAll('.checklist input[type="checkbox"]').forEach(function(cb) {
+  const saved = localStorage.getItem('checklist_' + cb.dataset.check);
+  if (saved === 'true') {
+    cb.checked = true;
+    cb.closest('label').classList.add('checked');
+  }
+  
+  cb.addEventListener('change', function() {
+    localStorage.setItem('checklist_' + this.dataset.check, this.checked);
+    if (this.checked) {
+      this.closest('label').classList.add('checked');
+    } else {
+      this.closest('label').classList.remove('checked');
+    }
+    updateChecklistProgress();
+  });
+});
+
+updateChecklistProgress();
+
+// ========== TOGGLE FUNCTIONS ==========
 function toggleCollapse(el) {
   el.classList.toggle('open');
   el.nextElementSibling.classList.toggle('open');
@@ -738,6 +1304,7 @@ document.querySelectorAll('.s-cat-header.open').forEach(function(el) {
   }
 });
 
+// ========== FADE IN ==========
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
     if (e.isIntersecting) { e.target.classList.add('visible'); }
@@ -840,21 +1407,25 @@ document.addEventListener('DOMContentLoaded', function() {
   if (l) { l.value = settings.lineHeight; document.getElementById('lhVal').textContent = settings.lineHeight; }
 });
 
-// ========== CUSTOM AUDIO/VIDEO PLAYERS ==========
+// ========== CUSTOM AUDIO PLAYERS ==========
 var audioPlayers = [];
-document.querySelectorAll('.audio-card').forEach(function(card) {
+
+function initAudio(card) {
   var src = card.getAttribute('data-src');
   var audio = new Audio(src);
-  audio.preload = 'metadata';
+  audio.preload = 'none';
+  
   audio.addEventListener('loadedmetadata', function() {
     card.querySelector('.duration').textContent = formatTime(audio.duration);
     card.querySelector('.time').textContent = '0:00 / ' + formatTime(audio.duration);
   });
+  
   audio.addEventListener('timeupdate', function() {
     var pct = (audio.currentTime / audio.duration) * 100;
     card.querySelector('.progress-fill').style.width = pct + '%';
     card.querySelector('.time').textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
   });
+  
   audio.addEventListener('ended', function() {
     var btn = card.querySelector('.play-btn');
     btn.classList.remove('playing');
@@ -862,17 +1433,46 @@ document.querySelectorAll('.audio-card').forEach(function(card) {
     card.querySelector('.progress-fill').style.width = '0%';
     card.querySelector('.time').textContent = '0:00 / ' + formatTime(audio.duration);
   });
+  
+  audio.addEventListener('error', function() {
+    card.querySelector('.duration').textContent = '⚠️ Файл не найден';
+  });
+  
   audioPlayers.push({audio: audio, card: card});
+  
+  card.addEventListener('click', function(e) {
+    if (e.target.closest('.play-btn') || e.target.closest('.progress-wrap')) return;
+    var btn = this.querySelector('.play-btn');
+    togglePlay(btn);
+  });
+}
+
+document.querySelectorAll('.audio-card').forEach(function(card) {
+  initAudio(card);
 });
+
 function togglePlay(btn) {
   var card = btn.closest('.audio-card');
   var player = audioPlayers.find(function(p) { return p.card === card; });
   if (!player) return;
+  
   if (player.audio.paused) {
     audioPlayers.forEach(function(p) {
-      if (!p.audio.paused) { p.audio.pause(); var b = p.card.querySelector('.play-btn'); b.classList.remove('playing'); b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; }
+      if (!p.audio.paused) { 
+        p.audio.pause(); 
+        var b = p.card.querySelector('.play-btn'); 
+        b.classList.remove('playing'); 
+        b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      }
     });
-    if (vid && !vid.paused) { vid.pause(); vidBtn.classList.remove('playing'); vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; }
+    
+    if (vid && !vid.paused) { 
+      vid.pause(); 
+      vidBtn.classList.remove('playing'); 
+      vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      if (bigPlay) bigPlay.classList.add('show');
+    }
+    
     player.audio.play();
     btn.classList.add('playing');
     btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
@@ -882,6 +1482,7 @@ function togglePlay(btn) {
     btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
   }
 }
+
 function seek(event, wrap) {
   var card = wrap.closest('.audio-card');
   var player = audioPlayers.find(function(p) { return p.card === card; });
@@ -890,47 +1491,106 @@ function seek(event, wrap) {
   player.audio.currentTime = ((event.clientX - rect.left) / rect.width) * player.audio.duration;
 }
 
+// ========== HOTKEYS ==========
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  
+  if (e.code === 'Space') {
+    e.preventDefault();
+    
+    const playingAudio = audioPlayers.find(p => !p.audio.paused);
+    if (playingAudio) {
+      const btn = playingAudio.card.querySelector('.play-btn');
+      togglePlay(btn);
+      return;
+    }
+    
+    if (vid) toggleVidPlay();
+  }
+});
+
+// ========== VIDEO PLAYER ==========
 var vid = document.getElementById('mainVideo');
 var vidBtn = document.getElementById('vidPlayBtn');
 var vidFill = document.getElementById('vidFill');
 var vidTime = document.getElementById('vidTime');
+var bigPlay = document.getElementById('bigPlayBtn');
+
 if (vid) {
-  vid.addEventListener('loadedmetadata', function() { vidTime.textContent = '0:00 / ' + formatTime(vid.duration); });
+  vid.addEventListener('loadedmetadata', function() { 
+    vidTime.textContent = '0:00 / ' + formatTime(vid.duration);
+    bigPlay.classList.add('show');
+  });
+  
   vid.addEventListener('timeupdate', function() {
     var pct = (vid.currentTime / vid.duration) * 100;
     vidFill.style.width = pct + '%';
     vidTime.textContent = formatTime(vid.currentTime) + ' / ' + formatTime(vid.duration);
   });
+  
   vid.addEventListener('ended', function() {
     vidBtn.classList.remove('playing');
     vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
     vidFill.style.width = '0%';
-    if (bigPlay) bigPlay.classList.add('show');
+    bigPlay.classList.add('show');
+  });
+  
+  vid.addEventListener('play', function() { 
+    bigPlay.classList.remove('show');
+    audioPlayers.forEach(function(p) {
+      if (!p.audio.paused) { 
+        p.audio.pause(); 
+        var b = p.card.querySelector('.play-btn'); 
+        b.classList.remove('playing'); 
+        b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      }
+    });
+  });
+  
+  vid.addEventListener('pause', function() { 
+    if (vid.currentTime > 0 && vid.currentTime < vid.duration) {
+      bigPlay.classList.add('show');
+    }
+  });
+  
+  vid.addEventListener('error', function() {
+    vidTime.textContent = '⚠️ Видео не найдено';
   });
 }
+
 function toggleVidPlay() {
   if (!vid) return;
   if (vid.paused) {
     audioPlayers.forEach(function(p) {
-      if (!p.audio.paused) { p.audio.pause(); var b = p.card.querySelector('.play-btn'); b.classList.remove('playing'); b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'; }
+      if (!p.audio.paused) { 
+        p.audio.pause(); 
+        var b = p.card.querySelector('.play-btn'); 
+        b.classList.remove('playing'); 
+        b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      }
     });
+    
     vid.play();
     vidBtn.classList.add('playing');
     vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-    if (bigPlay) bigPlay.classList.remove('show');
+    bigPlay.classList.remove('show');
   } else {
     vid.pause();
     vidBtn.classList.remove('playing');
     vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    bigPlay.classList.add('show');
   }
 }
+
 function seekVid(event) {
   if (!vid) return;
   var wrap = document.getElementById('vidProgress');
   var rect = wrap.getBoundingClientRect();
   vid.currentTime = ((event.clientX - rect.left) / rect.width) * vid.duration;
 }
+
 function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
   var m = Math.floor(s / 60);
   var sec = Math.floor(s % 60);
   return m + ':' + (sec < 10 ? '0' : '') + sec;
@@ -938,24 +1598,11 @@ function formatTime(s) {
 
 // ========== VOLUME, SPEED, DOWNLOAD, FULLSCREEN ==========
 var speedValues = [0.5, 0.75, 1, 1.25, 1.5, 2];
-function setAudioVol(el) {
-  var card = el.closest('.audio-card');
-  var player = audioPlayers.find(function(p) { return p.card === card; });
-  if (player) player.audio.volume = parseFloat(el.value);
-}
+
 function setVidVol(el) {
   if (vid) vid.volume = parseFloat(el.value);
 }
-function cycleSpeed(el) {
-  var card = el.closest('.audio-card');
-  var player = audioPlayers.find(function(p) { return p.card === card; });
-  if (!player) return;
-  var cur = player.audio.playbackRate;
-  var idx = speedValues.indexOf(cur);
-  var next = speedValues[(idx + 1) % speedValues.length];
-  player.audio.playbackRate = next;
-  el.textContent = next + '×';
-}
+
 function cycleVidSpeed() {
   if (!vid) return;
   var cur = vid.playbackRate;
@@ -964,15 +1611,7 @@ function cycleVidSpeed() {
   vid.playbackRate = next;
   document.getElementById('vidSpeedBtn').textContent = next + '×';
 }
-function downloadAudio(el) {
-  var card = el.closest('.audio-card');
-  var src = card.getAttribute('data-src');
-  var name = card.querySelector('.name').textContent;
-  var a = document.createElement('a');
-  a.href = src;
-  a.download = name + '.mp3';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-}
+
 function downloadVideo() {
   if (!vid) return;
   var src = vid.getAttribute('src');
@@ -981,27 +1620,18 @@ function downloadVideo() {
   a.download = 'ГЕОЭДС_обзор.mp4';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
+
 function toggleFullscreen() {
   if (!vid) return;
-  var el = vid;
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
-    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    if (vid.requestFullscreen) vid.requestFullscreen().catch(function(){});
+    else if (vid.webkitRequestFullscreen) vid.webkitRequestFullscreen();
+    else if (vid.msRequestFullscreen) vid.msRequestFullscreen();
   } else {
     if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
     else if (document.msExitFullscreen) document.msExitFullscreen();
   }
-}
-
-// Big play overlay
-var bigPlay = document.getElementById('bigPlayBtn');
-if (vid && bigPlay) {
-  bigPlay.classList.add('show');
-  vid.addEventListener('play', function() { bigPlay.classList.remove('show'); });
-  vid.addEventListener('pause', function() { if (vid.currentTime > 0) bigPlay.classList.add('show'); });
-  vid.addEventListener('timeupdate', function() { if (vid.paused && vid.currentTime === 0) bigPlay.classList.add('show'); });
 }
 </script>
 </body>
