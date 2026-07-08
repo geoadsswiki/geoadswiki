@@ -723,40 +723,68 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
     <p>Наглядные разборы скриптов, возражений и алгоритмов работы.</p>
   </div>
 
-  <div class="player-block video-card fade-in">
-    <div class="video-top">
-      <div class="icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
-      <div class="info">
-        <div class="name">ГЕОЭДС — обзор работы</div>
-        <div class="desc">Объяснение функционала, и т.д</div>
+  <div class="videos-grid">
+
+    <!-- Видео 1 -->
+    <div class="player-block video-card fade-in">
+      <div class="video-top">
+        <div class="icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <div class="info">
+          <div class="name">ГЕОЭДС — обзор работы</div>
+          <div class="desc">Объяснение функционала, и т.д</div>
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video class="vid-player" preload="metadata" playsinline src="video/ГЕОЭДС.mp4"></video>
+        <button class="big-play" onclick="event.stopPropagation();toggleVidPlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+      </div>
+      <div class="video-controls">
+        <button class="play-btn" onclick="toggleVidPlay(this)"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
+        <div class="progress-wrap" onclick="seekVid(event,this)">
+          <div class="progress-fill"></div>
+        </div>
+        <span class="time">0:00 / 0:00</span>
+      </div>
+      <div class="sec-controls">
+        <div class="ctrl-group">
+          <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <input class="vol-slider" type="range" min="0" max="1" step="0.05" value="1" oninput="setVidVol(this)">
+        </div>
+        <div class="ctrl-group">
+          <button class="speed-btn" onclick="cycleVidSpeed(this)">1×</button>
+        </div>
+        <button class="dload-btn" onclick="downloadVideo(this)" title="Скачать">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </button>
+        <button class="fs-btn" onclick="toggleFullscreen(this)" title="Во весь экран">
+          <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+        </button>
       </div>
     </div>
-    <div class="video-wrap">
-      <video id="mainVideo" preload="metadata" playsinline src="video/ГЕОЭДС.mp4" onclick="toggleVidPlay()"></video>
-      <button class="big-play" id="bigPlayBtn" onclick="event.stopPropagation();toggleVidPlay()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-    </div>
-    <div class="video-controls">
-      <button class="play-btn" id="vidPlayBtn" onclick="toggleVidPlay()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
-      <div class="progress-wrap" id="vidProgress" onclick="seekVid(event)">
-        <div class="progress-fill" id="vidFill"></div>
+
+    <!-- Видео 2 -->
+    <div class="player-block video-card fade-in">
+      <div class="video-top">
+        <div class="icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <div class="info">
+          <div class="name">Название второго видео</div>
+          <div class="desc">Краткое описание</div>
+        </div>
       </div>
-      <span class="time" id="vidTime">0:00 / 0:00</span>
-    </div>
-    <div class="sec-controls">
-      <div class="ctrl-group">
-        <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-        <input class="vol-slider" type="range" min="0" max="1" step="0.05" value="1" oninput="setVidVol(this)">
+          <div class="video-wrap" style="border-radius:12px;overflow:hidden;background:#000;padding:0;">
+        <iframe 
+          src="https://vkvideo.ru/video_ext.php?oid=-240126034&id=456239018&hash=e65b119c506b815e&hd=4" 
+          width="100%" 
+          height="360" 
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
+          frameborder="0" 
+          allowfullscreen
+          style="display:block;width:100%;height:auto;aspect-ratio:16/9;border:none;background:#000;">
+        </iframe>
       </div>
-      <div class="ctrl-group">
-        <button class="speed-btn" id="vidSpeedBtn" onclick="cycleVidSpeed()">1×</button>
-      </div>
-      <button class="dload-btn" onclick="downloadVideo()" title="Скачать">
-        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      </button>
-      <button class="fs-btn" onclick="toggleFullscreen()" title="Во весь экран">
-        <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-      </button>
     </div>
+    </div>
+
   </div>
 </section>
 
@@ -846,6 +874,14 @@ body.sidebar-top .sidebar .settings-btn{width:auto;margin-top:0;margin-left:auto
 </footer>
 
 <script>
+// ========== FORMAT TIME ==========
+function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
+  var m = Math.floor(s / 60);
+  var sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
 // ========== PERSONALIZATION ==========
 function updatePlaceholders() {
   const manager = document.getElementById('settingsManagerName').value || '____';
@@ -1509,120 +1545,138 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ========== VIDEO PLAYER ==========
-var vid = document.getElementById('mainVideo');
-var vidBtn = document.getElementById('vidPlayBtn');
-var vidFill = document.getElementById('vidFill');
-var vidTime = document.getElementById('vidTime');
-var bigPlay = document.getElementById('bigPlayBtn');
 
-if (vid) {
-  vid.addEventListener('loadedmetadata', function() { 
-    vidTime.textContent = '0:00 / ' + formatTime(vid.duration);
-    bigPlay.classList.add('show');
-  });
+// ========== VIDEO PLAYER (multiple) ==========
+function toggleVidPlay(btn) {
+  var card = btn.closest('.video-card');
+  var vid = card.querySelector('.vid-player');
+  var playBtn = card.querySelector('.play-btn');
+  var bigPlay = card.querySelector('.big-play');
   
-  vid.addEventListener('timeupdate', function() {
-    var pct = (vid.currentTime / vid.duration) * 100;
-    vidFill.style.width = pct + '%';
-    vidTime.textContent = formatTime(vid.currentTime) + ' / ' + formatTime(vid.duration);
-  });
-  
-  vid.addEventListener('ended', function() {
-    vidBtn.classList.remove('playing');
-    vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-    vidFill.style.width = '0%';
-    bigPlay.classList.add('show');
-  });
-  
-  vid.addEventListener('play', function() { 
-    bigPlay.classList.remove('show');
-    audioPlayers.forEach(function(p) {
-      if (!p.audio.paused) { 
-        p.audio.pause(); 
-        var b = p.card.querySelector('.play-btn'); 
-        b.classList.remove('playing'); 
-        b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-      }
-    });
-  });
-  
-  vid.addEventListener('pause', function() { 
-    if (vid.currentTime > 0 && vid.currentTime < vid.duration) {
-      bigPlay.classList.add('show');
-    }
-  });
-  
-  vid.addEventListener('error', function() {
-    vidTime.textContent = '⚠️ Видео не найдено';
-  });
-}
-
-function toggleVidPlay() {
   if (!vid) return;
+  
   if (vid.paused) {
-    audioPlayers.forEach(function(p) {
-      if (!p.audio.paused) { 
-        p.audio.pause(); 
-        var b = p.card.querySelector('.play-btn'); 
-        b.classList.remove('playing'); 
-        b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    // Пауза всех других видео
+    document.querySelectorAll('.vid-player').forEach(function(v) {
+      if (!v.paused) {
+        v.pause();
+        var b = v.closest('.video-card').querySelector('.play-btn');
+        if (b) {
+          b.classList.remove('playing');
+          b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+        }
+        var bp = v.closest('.video-card').querySelector('.big-play');
+        if (bp) bp.classList.add('show');
       }
     });
     
     vid.play();
-    vidBtn.classList.add('playing');
-    vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-    bigPlay.classList.remove('show');
+    if (playBtn) {
+      playBtn.classList.add('playing');
+      playBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+    }
+    if (bigPlay) bigPlay.classList.remove('show');
   } else {
     vid.pause();
-    vidBtn.classList.remove('playing');
-    vidBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-    bigPlay.classList.add('show');
+    if (playBtn) {
+      playBtn.classList.remove('playing');
+      playBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    }
+    if (bigPlay) bigPlay.classList.add('show');
   }
 }
 
-function seekVid(event) {
+// Инициализация всех видео
+document.querySelectorAll('.vid-player').forEach(function(vid) {
+  var card = vid.closest('.video-card');
+  var fill = card.querySelector('.progress-fill');
+  var time = card.querySelector('.time');
+  var bigPlay = card.querySelector('.big-play');
+  
+  // Показываем большую кнопку
+  if (bigPlay) bigPlay.classList.add('show');
+  
+  vid.addEventListener('loadedmetadata', function() {
+    if (time) time.textContent = '0:00 / ' + formatTime(vid.duration);
+  });
+  
+  vid.addEventListener('timeupdate', function() {
+    if (fill) {
+      var pct = (vid.currentTime / vid.duration) * 100;
+      fill.style.width = pct + '%';
+    }
+    if (time) {
+      time.textContent = formatTime(vid.currentTime) + ' / ' + formatTime(vid.duration);
+    }
+  });
+  
+  vid.addEventListener('ended', function() {
+    var playBtn = card.querySelector('.play-btn');
+    if (playBtn) {
+      playBtn.classList.remove('playing');
+      playBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    }
+    if (fill) fill.style.width = '0%';
+    if (bigPlay) bigPlay.classList.add('show');
+  });
+  
+  // При воспроизведении видео — ставим паузу аудио
+  vid.addEventListener('play', function() {
+    audioPlayers.forEach(function(p) {
+      if (!p.audio.paused) {
+        p.audio.pause();
+        var b = p.card.querySelector('.play-btn');
+        if (b) {
+          b.classList.remove('playing');
+          b.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+        }
+      }
+    });
+  });
+});
+
+function seekVid(event, wrap) {
+  var card = wrap.closest('.video-card');
+  var vid = card.querySelector('.vid-player');
   if (!vid) return;
-  var wrap = document.getElementById('vidProgress');
   var rect = wrap.getBoundingClientRect();
   vid.currentTime = ((event.clientX - rect.left) / rect.width) * vid.duration;
 }
 
-function formatTime(s) {
-  if (!s || isNaN(s)) return '0:00';
-  var m = Math.floor(s / 60);
-  var sec = Math.floor(s % 60);
-  return m + ':' + (sec < 10 ? '0' : '') + sec;
-}
-
-// ========== VOLUME, SPEED, DOWNLOAD, FULLSCREEN ==========
-var speedValues = [0.5, 0.75, 1, 1.25, 1.5, 2];
-
 function setVidVol(el) {
+  var card = el.closest('.video-card');
+  var vid = card.querySelector('.vid-player');
   if (vid) vid.volume = parseFloat(el.value);
 }
 
-function cycleVidSpeed() {
+function cycleVidSpeed(btn) {
+  var card = btn.closest('.video-card');
+  var vid = card.querySelector('.vid-player');
   if (!vid) return;
+  var speedValues = [0.5, 0.75, 1, 1.25, 1.5, 2];
   var cur = vid.playbackRate;
   var idx = speedValues.indexOf(cur);
   var next = speedValues[(idx + 1) % speedValues.length];
   vid.playbackRate = next;
-  document.getElementById('vidSpeedBtn').textContent = next + '×';
+  btn.textContent = next + '×';
 }
 
-function downloadVideo() {
+function downloadVideo(btn) {
+  var card = btn.closest('.video-card');
+  var vid = card.querySelector('.vid-player');
   if (!vid) return;
   var src = vid.getAttribute('src');
   var a = document.createElement('a');
   a.href = src;
-  a.download = 'ГЕОЭДС_обзор.mp4';
+  a.download = src.split('/').pop() || 'video.mp4';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
-function toggleFullscreen() {
+function toggleFullscreen(btn) {
+  var card = btn.closest('.video-card');
+  var vid = card.querySelector('.vid-player');
   if (!vid) return;
+  
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
     if (vid.requestFullscreen) vid.requestFullscreen().catch(function(){});
     else if (vid.webkitRequestFullscreen) vid.webkitRequestFullscreen();
